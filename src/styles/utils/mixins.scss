@@ -1,0 +1,8 @@
+@mixin container {
+  $vw: 100vw;
+  padding: 50px calc($vw / 1920px * 100px);
+
+  @include media('<phone') {
+    padding: 16px;
+  }
+}
