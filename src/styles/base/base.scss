@@ -259,6 +259,15 @@ button {
 	}
 }
 
+ul {
+	list-style: disc;
+	list-style-position: inside;
+
+	li {
+		line-height: 1.5;
+	}
+}
+
 .desktop {
 	display: auto !important;
 
