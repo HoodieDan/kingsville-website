@@ -3,7 +3,7 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 </script>
 
 <template>
-	<div class="py-10 flex flex-col gap-10">
+	<div class="py-10 flex flex-col md:gap-10">
 		<ContainerWrapper>
 			<div class="flex flex-col-reverse md:flex-row">
 				<div class="w-full md:w-5/12 p-5">

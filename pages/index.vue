@@ -22,7 +22,7 @@ const pastors = ref([
 </script>
 
 <template>
-	<div class="py-5 flex flex-col gap-10">
+	<div class="py-5 flex flex-col md:gap-10">
 		<ContainerWrapper>
 			<div
 				class="bg-black text-white p-10 rounded-3xl flex flex-col items-start gap-3"
