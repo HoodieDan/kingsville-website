@@ -1,319 +1,331 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
-  user-select: none;
-  position: relative;
+	box-sizing: border-box;
+	user-select: none;
+	position: relative;
 }
 
-html, body {
-  line-height: 1;
-  scroll-behavior: smooth;
-  background-color: #f0f0f0;
-  height: auto;
-  overflow-x: hidden;
-  letter-spacing: normal;
-  word-spacing: normal;
-  $vw: 100vw;
-  font-size: calc($vw / 1920px * 22px);
+html,
+body {
+	line-height: 1;
+	scroll-behavior: smooth;
+	background-color: #f0f0f0;
+	height: auto;
+	overflow-x: hidden;
+	letter-spacing: normal;
+	word-spacing: normal;
+	$vw: 100vw;
+	font-size: calc($vw / 1920px * 22px);
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 18px);
-    overflow: auto;
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 18px);
+		overflow: auto;
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 18px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 18px);
+	}
 }
 
 p {
-  line-height: 1.1;
+	line-height: 1.3;
 
-  &.big {
-    $vw: 100vw;
-    font-size: calc($vw / 1920px * 24px);
+	&.big {
+		$vw: 100vw;
+		font-size: calc($vw / 1920px * 24px);
 
-    @include media('<phone') {
-      font-size: calc($vw / 750px * 20px);
-      overflow-x: hidden;
-    }
+		@include media("<phone") {
+			font-size: calc($vw / 750px * 20px);
+			overflow-x: hidden;
+		}
 
-    @include media('<small') {
-      font-size: calc($vw / 500px * 20px);
-    }
-  }
+		@include media("<small") {
+			font-size: calc($vw / 500px * 20px);
+		}
+	}
 
-  &.bigger {
-    $vw: 100vw;
-    font-size: calc($vw / 1920px * 32px);
+	&.bigger {
+		$vw: 100vw;
+		font-size: calc($vw / 1920px * 32px);
 
-    @include media('<phone') {
-      font-size: calc($vw / 750px * 32px);
-      overflow-x: hidden;
-    }
+		@include media("<phone") {
+			font-size: calc($vw / 750px * 32px);
+			overflow-x: hidden;
+		}
 
-    @include media('<small') {
-      font-size: calc($vw / 500px * 30px);
-    }
-  }
+		@include media("<small") {
+			font-size: calc($vw / 500px * 30px);
+		}
+	}
 }
 
 br {
-  @include media('<phone') {
-    visibility: hidden;
-  }
+	@include media("<phone") {
+		visibility: hidden;
+	}
 }
 
 small {
-  $vw: 100vw;
-  font-size: calc($vw / 1920px * 18px);
+	$vw: 100vw;
+	font-size: calc($vw / 1920px * 18px);
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 14px);
-    overflow-x: hidden;
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 14px);
+		overflow-x: hidden;
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 13px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 13px);
+	}
 }
 
 h1 {
-  font-weight: 700;
-  line-height: 0.9;
-  $vw: 100vw;
-  font-size: calc($vw / 1920px * 150px);
+	font-weight: 700;
+	line-height: 0.9;
+	$vw: 100vw;
+	font-size: calc($vw / 1920px * 150px);
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 100px);
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 100px);
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 70px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 70px);
+	}
 }
 
 h2 {
-  font-weight: 400;
-  $vw: 100vw;
-  font-size: calc($vw / 1920px * 90px);
+	font-weight: 400;
+	$vw: 100vw;
+	font-size: calc($vw / 1920px * 90px);
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 78px);
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 78px);
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 78px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 78px);
+	}
 }
 
 h3 {
-  font-weight: 400;
-  $vw: 100vw;
-  font-size: calc($vw / 1920px * 65px);
+	font-weight: 400;
+	$vw: 100vw;
+	font-size: calc($vw / 1920px * 65px);
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 35px);
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 35px);
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 32px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 32px);
+	}
 }
 
 h4 {
-  font-weight: 700;
-  $vw: 100vw;
-  font-size: calc($vw / 1920px * 50px);
+	font-weight: 700;
+	$vw: 100vw;
+	font-size: calc($vw / 1920px * 50px);
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 50px);
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 50px);
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 48px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 48px);
+	}
 }
 
 h5 {
-  font-weight: 400;
-  $vw: 100vw;
-  font-style: italic;
-  font-size: calc($vw / 1920px * 35px);
+	font-weight: 400;
+	$vw: 100vw;
+	font-style: italic;
+	font-size: calc($vw / 1920px * 35px);
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 35px);
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 35px);
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 35px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 35px);
+	}
 }
 
 h6 {
-  font-weight: 500;
-  $vw: 100vw;
-  font-size: calc($vw / 1920px * 22px);
+	font-weight: 500;
+	$vw: 100vw;
+	font-size: calc($vw / 1920px * 22px);
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 22px);
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 22px);
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 20px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 20px);
+	}
 }
 
 .page {
-  padding: 1rem;
-  z-index: z('content');
+	padding: 1rem;
+	z-index: z("content");
 }
 
 // body {
 //   font-family: $font-satoshi;
 //   background-color: $color-white;
 //   color: $color-black;
-  
+
 //   @include media('<phone') {
 //     overflow-x: hidden;
 //   }
 // }
 
 a {
-  color: inherit;
-  text-decoration: none;
-  outline: none;
+	color: inherit;
+	text-decoration: none;
+	outline: none;
 }
 
 .page-btn {
-  margin: 2rem;
+	margin: 2rem;
 
-  @include media('<phone') {
-    margin-right: 0;
-    margin-left: 0;
-  }
+	@include media("<phone") {
+		margin-right: 0;
+		margin-left: 0;
+	}
 }
 
 img {
-  vertical-align: middle;
+	vertical-align: middle;
 }
 
-input, textarea {
-  border: 1px solid $color-grey;
-  width: 100%;
-  border-radius: 5px;
-  padding: 14px;
-  margin-bottom: 1rem;
-  margin-top: 0.5rem;
-  color: $color-white;
-  font-family: $font-satoshi;
-  $vw: 100vw;
-  font-size: calc($vw / 1920px * 18px);
-  background: $color-white;
+input,
+textarea {
+	border: 1px solid $color-grey;
+	width: 100%;
+	border-radius: 5px;
+	padding: 14px;
+	margin-bottom: 1rem;
+	margin-top: 0.5rem;
+	color: $color-white;
+	font-family: $font-satoshi;
+	$vw: 100vw;
+	font-size: calc($vw / 1920px * 18px);
+	background: $color-white;
 
-  @include media('<phone') {
-    font-size: calc($vw / 750px * 16px);
-  }
+	@include media("<phone") {
+		font-size: calc($vw / 750px * 16px);
+	}
 
-  @include media('<small') {
-    font-size: calc($vw / 500px * 16px);
-  }
+	@include media("<small") {
+		font-size: calc($vw / 500px * 16px);
+	}
 
-  &[type='file'] {
-    width: 30%;
+	&[type="file"] {
+		width: 30%;
 
-    @include media('<small') {
-      width: 70%;
-    }
-  }
+		@include media("<small") {
+			width: 70%;
+		}
+	}
 
-  &::placeholder {
-    color: $color-grey;
-  }
+	&::placeholder {
+		color: $color-grey;
+	}
 
-  &:focus {
-    border: 1px solid $color-white;
-    outline: none;
-  }
+	&:focus {
+		border: 1px solid $color-white;
+		outline: none;
+	}
 }
 
 button {
-  padding: 10px 20px;
-  background: #28166f;
-  color: $color-white;
-  border-radius: 15px;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 500;
+	padding: 15px 25px;
+	background: #28166f;
+	color: $color-white;
+	border-radius: 32px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	font-weight: 500;
 
-  &.outline {
-    background: none;
-    border: 1px solid $color-white;
-    border-radius: 32px;
-  }
+	&.outline {
+		background: none;
+		border: 1px solid $color-white;
+		border-radius: 32px;
+	}
 }
 
 .desktop {
-  display: auto !important;
+	display: auto !important;
 
-  @include media('<phone') {
-    display: none !important;
-  }
+	@include media("<phone") {
+		display: none !important;
+	}
 }
 
 .phone {
-  display: none !important;
-  
-  @include media('<phone') {
-    display: block !important;
-  }
+	display: none !important;
+
+	@include media("<phone") {
+		display: block !important;
+	}
 }
 
 .underlined__header {
-  &::after {
-    content: '';
-    position: absolute;
-    top: 105%;
-    height: 2px;
-    background-color: $color-white;
-    width: 150px;
-  }
+	&::after {
+		content: "";
+		position: absolute;
+		top: 105%;
+		height: 2px;
+		background-color: $color-white;
+		width: 150px;
+	}
 }
 
 .noise-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: z('bg');
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none;
+	z-index: z("bg");
 }
 
 .bubble {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  color: #898989;
-  width: 120px;
-  height: 120px;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  border: 1px solid $color-grey;
-  background-color: transparent;
-  padding: 15px;
-  box-sizing: border-box;
-  cursor: grab;
-  transition: background-color 0.3s linear;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	color: #898989;
+	width: 120px;
+	height: 120px;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	border: 1px solid $color-grey;
+	background-color: transparent;
+	padding: 15px;
+	box-sizing: border-box;
+	cursor: grab;
+	transition: background-color 0.3s linear;
 
-  &:hover {
-    background-color: $color-white;
-    color: $color-grey;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-    mix-blend-mode: difference;
-  }
+	&:hover {
+		background-color: $color-white;
+		color: $color-grey;
+		box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+		mix-blend-mode: difference;
+	}
+}
+
+.link {
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: #dc6726;
+	}
 }

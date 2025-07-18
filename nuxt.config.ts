@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
 	app: {
 		head: {
-			title: "Nuxt Starter",
+			title: "Kingsville Church",
 			htmlAttrs: {
 				lang: "en",
 			},
