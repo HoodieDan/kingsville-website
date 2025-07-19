@@ -117,6 +117,7 @@ const handleFormSubmit = () => {
 				</div>
 
 				<div class="w-full md:w-5/12">
+                    <h4 class="mb-7 text-primary-blue">Send a <span class="font-zenith italic text-primary-orange underline">message</span></h4>
 					<form
 						class="flex flex-col gap-5"
 						@submit.prevent="handleFormSubmit"
