@@ -7,9 +7,9 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 		<ContainerWrapper>
 			<div class="flex flex-col-reverse md:flex-row">
 				<div class="w-full md:w-5/12 p-5">
-					<h2 class="!font-bold mb-5">
+					<h2 class="!font-bold mb-5 text-primary-blue">
 						Who we
-						<span class="!font-normal !font-zenith italic"
+						<span class="!font-normal !font-zenith italic text-primary-orange"
 							>are</span
 						>
 					</h2>
@@ -26,30 +26,33 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 
 					<div class="mt-6">
 						<div class="mt-2">
-							<h5 class="!font-zenith !font-normal mb-4">
+							<h5 class="!font-zenith !font-normal mb-4 text-primary-blue">
 								Service Times
 							</h5>
 							<div>
-								<h6 class="font-dark-grey mb-3">Sundays</h6>
+								<h6 class="font-dark-grey mb-3 text-primary-orange">Sundays</h6>
 								<p>
-									English Language Service at 9:00am to
-									11:30am
+									English Language Service at 9:00 AM to 11:15
+									AM
 								</p>
 								<p>
-									Yoruba Language Service at 11:30am to 1:15pm
+									Yoruba Language Service at 11:30 AM to 1:00
+									PM
 								</p>
 							</div>
 							<div class="mt-4">
-								<h6 class="font-dark-grey mb-3">
+								<h6 class="font-dark-grey mb-3 text-primary-orange">
 									Wednesdays (Online)
 								</h6>
-								<p>Every week from 6:30pm to 8:00pm on Zoom</p>
+								<p>
+									Every week from 6:45 PM to 8:00 PM on Zoom
+								</p>
 							</div>
 						</div>
 					</div>
 					<div class="mt-6">
 						<div class="mt-2">
-							<h5 class="!font-zenith !font-normal mb-4">
+							<h5 class="!font-zenith !font-normal mb-4 text-primary-blue">
 								Locations
 							</h5>
 							<p class="mb-1">
@@ -62,7 +65,7 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 				</div>
 				<div
 					class="w-full md:w-7/12 h-[35rem] bg-placeholder rounded-md"
-				></div>
+				/>
 			</div>
 		</ContainerWrapper>
 
@@ -70,12 +73,12 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 			<div class="flex flex-col md:flex-row md:items-center">
 				<div
 					class="w-full md:w-1/3 h-72 bg-placeholder rounded-md"
-				></div>
+				/>
 				<div class="w-full md:w-2/3 p-10">
-					<h5 class="!font-zenith text-dark-grey mb-5">
+					<h5 class="!font-zenith text-primary-orange mb-5">
 						Our Passion
 					</h5>
-					<h4 class="my-7 !font-bold">The future we're building</h4>
+					<h4 class="my-7 !font-bold text-primary-blue">The future we're building</h4>
 					<p>
 						4 Pillars of Kingsville Church: We are passionate about
 						<span class="!font-zenith italic"
@@ -96,8 +99,8 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 		<ContainerWrapper class="mt-24">
 			<div class="flex flex-col-reverse md:flex-row md:items-center">
 				<div class="w-full md:w-2/3 p-10">
-					<h5 class="!font-zenith text-dark-grey mb-5">Our Vision</h5>
-					<h4 class="my-7 !font-bold">Our Daily Pursuit</h4>
+					<h5 class="!font-zenith text-primary-orange mb-5">Our Vision</h5>
+					<h4 class="my-7 !font-bold text-primary-blue">Our Daily Pursuit</h4>
 					<p>
 						At Kingsville Church, our vision is clear: to raise
 						successful godly lights who shine in every area of life.
@@ -126,7 +129,7 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 				</div>
 				<div
 					class="w-full md:w-1/3 h-72 bg-placeholder rounded-md"
-				></div>
+				/>
 			</div>
 		</ContainerWrapper>
 
@@ -134,12 +137,12 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 			<div class="flex flex-col md:flex-row md:items-center">
 				<div
 					class="w-full md:w-1/3 h-72 bg-placeholder rounded-md"
-				></div>
+				/>
 				<div class="w-full md:w-2/3 p-10">
-					<h5 class="!font-zenith text-dark-grey mb-5">
+					<h5 class="!font-zenith text-primary-orange mb-5">
 						Our Core Values
 					</h5>
-					<h4 class="my-7 !font-bold">Living the Kingsville way</h4>
+					<h4 class="my-7 !font-bold text-primary-blue">Living the Kingsville way</h4>
 					<p>
 						Our values define our culture. SEAGRIP is more than an
 						acronym — it’s how we serve, grow, and reflect Christ
@@ -178,9 +181,9 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 		<ContainerWrapper>
 			<div class="flex flex-col-reverse md:flex-row">
 				<div class="w-full md:w-7/12 p-5">
-					<h2 class="!font-bold mb-5">
+					<h2 class="!font-bold mb-5 text-primary-blue">
 						Meet
-						<span class="!font-normal !font-zenith italic"
+						<span class="!font-normal !font-zenith italic text-primary-orange"
 							>Reverend Paul Rotua</span
 						>
 					</h2>
@@ -216,7 +219,7 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 				</div>
 				<div
 					class="w-full md:w-5/12 h-[35rem] bg-placeholder rounded-md"
-				></div>
+				/>
 			</div>
 		</ContainerWrapper>
 	</div>

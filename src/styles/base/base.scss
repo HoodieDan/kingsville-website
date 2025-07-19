@@ -204,15 +204,14 @@ input,
 textarea {
 	border: 1px solid $color-grey;
 	width: 100%;
-	border-radius: 5px;
-	padding: 14px;
+	border-radius: 0.5rem;
+	padding: 1rem;
 	margin-bottom: 1rem;
 	margin-top: 0.5rem;
-	color: $color-white;
 	font-family: $font-satoshi;
 	$vw: 100vw;
 	font-size: calc($vw / 1920px * 18px);
-	background: $color-white;
+	background: transparent;
 
 	@include media("<phone") {
 		font-size: calc($vw / 750px * 16px);
@@ -241,21 +240,26 @@ textarea {
 }
 
 button {
-	padding: 15px 25px;
+	padding: 1rem 1.5rem;
 	background: #28166f;
 	color: $color-white;
-	border-radius: 32px;
+	border-radius: 2rem;
 	border: none;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
 	font-weight: 500;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background: rgba(40, 22, 111, 0.8);
+	}
 
 	&.outline {
 		background: none;
 		border: 1px solid $color-white;
-		border-radius: 32px;
+		border-radius: 2rem;
 	}
 }
 
