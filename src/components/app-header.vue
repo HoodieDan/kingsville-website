@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ContainerWrapper from "./container-wrapper.vue";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 const navIsOpen = ref(false);
 
