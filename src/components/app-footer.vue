@@ -24,7 +24,7 @@ import ContainerWrapper from "./container-wrapper.vue";
 						<p class="text-dark-grey">Our Home</p>
 						<div class="flex flex-col gap-3 items-start">
 							<NuxtLink to="/about" class="link">About</NuxtLink>
-							<NuxtLink to="#" class="link">Ministries</NuxtLink>
+							<!-- <NuxtLink to="#" class="link">Ministries</NuxtLink> -->
 							<NuxtLink to="#" class="link"
 								>Media Center</NuxtLink
 							>

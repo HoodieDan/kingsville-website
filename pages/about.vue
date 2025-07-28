@@ -51,10 +51,10 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 								<h6
 									class="font-dark-grey mb-3 text-primary-orange"
 								>
-									Wednesdays (Online)
+									Thursdays (Online)
 								</h6>
 								<p>
-									Every week from 6:45 PM to 8:00 PM on Zoom
+									Every week from 6:45 PM to 8:00 PM
 								</p>
 							</div>
 						</div>

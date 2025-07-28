@@ -11,7 +11,7 @@ const pastors = ref([
 		title: "Global Pastor",
 		image: revImage,
 		summary:
-			"With a passion to see people attain self-actualization by manifesting their potentials in the grace and love of God, he shares the message of God’s awesome grace with simplicity, clarity and an unwavering sincerity to see people’s lives transformed.",
+			"A pastor from the heart, Reverend Paul Rotua has been in the Lord’s service since his teenage years as president of the Christian Fellowship of the Federal Government College, Ijanikin, Lagos; and later as an associate pastor in Victory Christian Fellowship (VCF) at the University of Ibadan, where he studied Human Nutrition. Fondly called Pastor Paul, his life has been characterised by the manifestation of the grace of God; which has been the main thrust of his service to the Body of Christ and the world. With a passion to see people attain self-actualization by manifesting their potentials in the grace and love of God, he shares the message of God’s awesome grace with simplicity, clarity and an unwavering sincerity to see people’s lives transformed. A regular speaker at conferences at home and abroad, he is the host of the highly acclaimed Encounters with Grace on radio and Encounters with Grace Live, a specialised teaching outreach.",
 	},
 	{
 		name: "Pastor Sade Paul-Rotua",
@@ -59,11 +59,11 @@ const pastors = ref([
 			<div class="flex gap-30 md:gap-10 mt-5 flex-col md:flex-row">
 				<div class="md:flex-1">
 					<div class="h-96 w-full flex flex-col gap-3">
-							<img
-								src="../public/images/kvc-alagomeji.jpg"
-								alt="kingsville church alagomeji"
-								class="w-full h-full object-cover rounded-md"
-							/>
+						<img
+							src="../public/images/kvc-alagomeji.jpg"
+							alt="kingsville church alagomeji"
+							class="w-full h-full object-cover rounded-md"
+						/>
 						<h3 class="!font-bold text-primary-blue">Alagomeji</h3>
 						<p>
 							2 Akinwunmi street, off Hughes Ave, Alagomeji-Yaba,
@@ -73,11 +73,11 @@ const pastors = ref([
 				</div>
 				<div class="md:flex-1">
 					<div class="h-96 w-full flex flex-col gap-3">
-							<img
-								src="../public/images/kvc-alagomeji.jpg"
-								alt="kingsville church alagomeji"
-								class="w-full h-full object-cover rounded-md"
-							/>
+						<img
+							src="../public/images/kvc-alagomeji.jpg"
+							alt="kingsville church alagomeji"
+							class="w-full h-full object-cover rounded-md"
+						/>
 						<h3 class="!font-bold text-primary-orange">Okota</h3>
 						<p>101 Okota Rd, Ilasamaja, Lagos 102214, Lagos.</p>
 					</div>
