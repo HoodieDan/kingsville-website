@@ -34,7 +34,7 @@ const toggleNav = () => {
 
 <template>
 	<div>
-		<div class="bg-grey py-2">
+		<div class="bg-grey py-2 hidden md:block">
 			<ContainerWrapper>
 				<div class="flex justify-center gap-5">
 					<NuxtLink to="/about" class="link">About</NuxtLink>
@@ -45,7 +45,7 @@ const toggleNav = () => {
 			</ContainerWrapper>
 		</div>
 		<ContainerWrapper>
-			<div class="flex justify-between items-center py-3">
+			<div class="flex justify-between items-center py-5 md:py-3">
 				<NuxtLink to="/"
 					><img
 						src="../assets/images/logo.png"
@@ -89,32 +89,45 @@ const toggleNav = () => {
 									class="nav-socials flex gap-5 w-full justify-between"
 								>
 									<a
-										href="#"
+										href="https://www.facebook.com/share/1CK52nBB4j/?mibextid=wwXIfr"
 										class="link"
 										target="_blank"
 										rel="noopener"
-										><UIcon
-											name="lucide:facebook"
-											class="text-md md:text-3xl"
-									/></a>
+									>
+										<UIcon name="lucide:facebook" class="text-md md:text-3xl" />
+									</a>
 									<a
-										href="#"
+										href="https://www.instagram.com/kingsvillechurchglobal?igsh=Mm9uZTV1ZW1ycGMy&utm_source=ig_contact_invite"
 										class="link"
 										target="_blank"
 										rel="noopener"
-										><UIcon
-											name="lucide:instagram"
-											class="text-md md:text-3xl"
-									/></a>
+									>
+										<UIcon name="lucide:instagram" class="text-md md:text-3xl" />
+									</a>
 									<a
-										href="#"
+										href="https://youtube.com/@kingsvillechurchlagos?si=ha27xgsETbiN2_FK"
 										class="link"
 										target="_blank"
 										rel="noopener"
-										><UIcon
-											name="lucide:twitter"
-											class="text-md md:text-3xl"
-									/></a>
+									>
+										<UIcon name="lucide:youtube" class="text-md md:text-3xl" />
+									</a>
+									<!-- <a
+										href="https://www.tiktok.com/@kingsvillechurch?_t=ZM-8yPUGBZbZfM&_r=1"
+										class="link"
+										target="_blank"
+										rel="noopener"
+									>
+										<UIcon name="lucide:tiktok" class="text-md md:text-3xl" />
+									</a> -->
+									<a
+										href="https://x.com/kingsvillelagos?s=21"
+										class="link"
+										target="_blank"
+										rel="noopener"
+									>
+										<UIcon name="lucide:twitter" class="text-md md:text-3xl" />
+									</a>
 								</div>
 							</div>
 

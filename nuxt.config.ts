@@ -1,7 +1,8 @@
+import { apiEndpoint, repositoryName } from "./slicemachine.config.json";
 import tailwindcss from "@tailwindcss/vite";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	app: {
+    app: {
 		head: {
 			title: "Kingsville Church",
 			htmlAttrs: {
@@ -69,11 +70,17 @@ export default defineNuxtConfig({
 			],
 		},
 	},
-	compatibilityDate: "2025-07-15",
-	devtools: { enabled: true },
-	modules: ["@nuxt/eslint", "@nuxt/image", "@nuxt/ui"],
-	css: ["./src/assets/css/main.css", "./src/styles/index.scss"],
-	vite: {
+
+    compatibilityDate: "2025-07-15",
+    devtools: { enabled: true },
+    modules: ["@nuxt/eslint", "@nuxt/image", "@nuxt/ui", "@nuxtjs/prismic"],
+    css: ["./src/assets/css/main.css", "./src/styles/index.scss"],
+
+    vite: {
 		plugins: [tailwindcss()],
 	},
+
+    prismic: {
+        endpoint: apiEndpoint || repositoryName
+    }
 });

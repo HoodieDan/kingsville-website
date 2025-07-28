@@ -93,6 +93,18 @@ h1 {
 	@include media("<small") {
 		font-size: calc($vw / 500px * 70px);
 	}
+
+	&.big {
+		font-size: calc($vw / 1920px * 200px);
+
+		@include media("<phone") {
+			font-size: calc($vw / 750px * 150px);
+		}
+
+		@include media("<small") {
+			font-size: calc($vw / 500px * 90px);
+		}
+	}
 }
 
 h2 {
@@ -341,4 +353,8 @@ ul {
 	&:hover {
 		color: #dc6726;
 	}
+}
+
+.tight {
+	letter-spacing: -0.1em;
 }

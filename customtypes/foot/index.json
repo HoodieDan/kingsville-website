@@ -1,0 +1,10 @@
+{
+  "format": "custom",
+  "id": "foot",
+  "json": {
+    "Main": {}
+  },
+  "label": "foot",
+  "repeatable": false,
+  "status": true
+}
