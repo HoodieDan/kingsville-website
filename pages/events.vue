@@ -12,7 +12,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex-1">
+                <div class="flex-1 bg-grey rounded-lg overflow-hidden">
                     <img src="../public/images/upcoming-events.jpeg" alt="upcoming-events" class="w-full h-full object-cover rounded-lg" />
                 </div>
             </div>
