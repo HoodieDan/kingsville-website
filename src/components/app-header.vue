@@ -39,7 +39,7 @@ const toggleNav = () => {
 				<div class="flex justify-center gap-5">
 					<NuxtLink to="/about" class="link">About</NuxtLink>
 					<!-- <NuxtLink to="#" class="link">Ministries</NuxtLink> -->
-					<NuxtLink to="#" class="link">Media Center</NuxtLink>
+					<NuxtLink to="/media-center" class="link">Media Center</NuxtLink>
 					<NuxtLink to="/contact" class="link">Contact</NuxtLink>
 				</div>
 			</ContainerWrapper>
@@ -68,6 +68,9 @@ const toggleNav = () => {
 
 		<div
 			class="navbar-overlay !fixed opacity-0 top-0 left-0 bg-transparent pointer-events-none w-screen h-screen flex justify-center items-center text-white z-[9999]"
+			@wheel.prevent
+			@touchmove.prevent
+			@scroll.prevent
 		>
 			<ContainerWrapper>
 				<div class="w-full p-4 md:p-48">
@@ -94,7 +97,10 @@ const toggleNav = () => {
 										target="_blank"
 										rel="noopener"
 									>
-										<UIcon name="lucide:facebook" class="text-md md:text-3xl" />
+										<UIcon
+											name="lucide:facebook"
+											class="text-md md:text-3xl"
+										/>
 									</a>
 									<a
 										href="https://www.instagram.com/kingsvillechurchglobal?igsh=Mm9uZTV1ZW1ycGMy&utm_source=ig_contact_invite"
@@ -102,7 +108,10 @@ const toggleNav = () => {
 										target="_blank"
 										rel="noopener"
 									>
-										<UIcon name="lucide:instagram" class="text-md md:text-3xl" />
+										<UIcon
+											name="lucide:instagram"
+											class="text-md md:text-3xl"
+										/>
 									</a>
 									<a
 										href="https://youtube.com/@kingsvillechurchlagos?si=ha27xgsETbiN2_FK"
@@ -110,7 +119,10 @@ const toggleNav = () => {
 										target="_blank"
 										rel="noopener"
 									>
-										<UIcon name="lucide:youtube" class="text-md md:text-3xl" />
+										<UIcon
+											name="lucide:youtube"
+											class="text-md md:text-3xl"
+										/>
 									</a>
 									<!-- <a
 										href="https://www.tiktok.com/@kingsvillechurch?_t=ZM-8yPUGBZbZfM&_r=1"
@@ -126,7 +138,10 @@ const toggleNav = () => {
 										target="_blank"
 										rel="noopener"
 									>
-										<UIcon name="lucide:twitter" class="text-md md:text-3xl" />
+										<UIcon
+											name="lucide:twitter"
+											class="text-md md:text-3xl"
+										/>
 									</a>
 								</div>
 							</div>
@@ -135,25 +150,37 @@ const toggleNav = () => {
 								class="flex flex-col gap-10 justify-between items-start p-10 md:p-48 !font-zenith italic text-2xl md:text-7xl"
 							>
 								<div class="nav-link">
-									<NuxtLink to="/about" class="link" @click="toggleNav"
+									<NuxtLink
+										to="/about"
+										class="link"
+										@click="toggleNav"
 										>About</NuxtLink
 									>
 									<div class="nav-item-wrapper"></div>
 								</div>
 								<div class="nav-link">
-									<NuxtLink to="/media-center" class="link" @click="toggleNav"
+									<NuxtLink
+										to="/media-center"
+										class="link"
+										@click="toggleNav"
 										>Media</NuxtLink
 									>
 									<div class="nav-item-wrapper"></div>
 								</div>
 								<div class="nav-link">
-									<NuxtLink to="/events" class="link" @click="toggleNav"
+									<NuxtLink
+										to="/events"
+										class="link"
+										@click="toggleNav"
 										>Events</NuxtLink
 									>
 									<div class="nav-item-wrapper"></div>
 								</div>
 								<div class="nav-link">
-									<NuxtLink to="/contact" class="link" @click="toggleNav"
+									<NuxtLink
+										to="/contact"
+										class="link"
+										@click="toggleNav"
 										>Contact</NuxtLink
 									>
 									<div class="nav-item-wrapper"></div>

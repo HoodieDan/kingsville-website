@@ -1,0 +1,45 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"date": {
+				"__TYPE__": "FieldContent",
+				"type": "Date",
+				"value": "2015-12-05"
+			},
+			"message_title": {
+				"__TYPE__": "FieldContent",
+				"value": "war",
+				"type": "Text"
+			},
+			"minister": {
+				"__TYPE__": "FieldContent",
+				"value": "fewer",
+				"type": "Text"
+			},
+			"embed_link": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Non id minim dolore elit proident non sunt incididunt commodo est laborum. Ullamco laboris incididunt excepteur reprehenderit elit incididunt sunt ullamco ipsum ipsum. Sunt incididunt consequat veniam laborum pariatur reprehenderit."
+						}
+					}
+				]
+			},
+			"description": {
+				"__TYPE__": "FieldContent",
+				"value": "degree",
+				"type": "Text"
+			},
+			"scriptures": {
+				"__TYPE__": "FieldContent",
+				"value": "sister",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

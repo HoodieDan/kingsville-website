@@ -1,0 +1,63 @@
+{
+  "id": "message",
+  "type": "SharedSlice",
+  "name": "Message",
+  "description": "Message",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "date": {
+          "type": "Date",
+          "config": {
+            "label": "date",
+            "placeholder": ""
+          }
+        },
+        "message_title": {
+          "type": "Text",
+          "config": {
+            "label": "message title",
+            "placeholder": ""
+          }
+        },
+        "minister": {
+          "type": "Text",
+          "config": {
+            "label": "minister",
+            "placeholder": ""
+          }
+        },
+        "embed_link": {
+          "type": "StructuredText",
+          "config": {
+            "label": "embed link",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "description": {
+          "type": "Text",
+          "config": {
+            "label": "description",
+            "placeholder": ""
+          }
+        },
+        "scriptures": {
+          "type": "Text",
+          "config": {
+            "label": "scriptures",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

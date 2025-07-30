@@ -148,7 +148,75 @@ interface FootDocumentData {}
 export type FootDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<FootDocumentData>, "foot", Lang>;
 
-export type AllDocumentTypes = EventsDocument | FootDocument;
+type MediaCenterDocumentDataSlicesSlice = MessageSlice;
+
+/**
+ * Content for media center documents
+ */
+interface MediaCenterDocumentData {
+  /**
+   * Slice Zone field in *media center*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_center.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<MediaCenterDocumentDataSlicesSlice> /**
+   * Meta Title field in *media center*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: media_center.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *media center*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: media_center.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *media center*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_center.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * media center document from Prismic
+ *
+ * - **API ID**: `media_center`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type MediaCenterDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<MediaCenterDocumentData>,
+    "media_center",
+    Lang
+  >;
+
+export type AllDocumentTypes =
+  | EventsDocument
+  | FootDocument
+  | MediaCenterDocument;
 
 /**
  * Item in *Event → Default → Primary → tags*
@@ -257,6 +325,101 @@ type EventSliceVariation = EventSliceDefault;
  */
 export type EventSlice = prismic.SharedSlice<"event", EventSliceVariation>;
 
+/**
+ * Primary content in *Message → Default → Primary*
+ */
+export interface MessageSliceDefaultPrimary {
+  /**
+   * date field in *Message → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: message.default.primary.date
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * message title field in *Message → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: message.default.primary.message_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  message_title: prismic.KeyTextField;
+
+  /**
+   * minister field in *Message → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: message.default.primary.minister
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  minister: prismic.KeyTextField;
+
+  /**
+   * embed link field in *Message → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: message.default.primary.embed_link
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  embed_link: prismic.RichTextField;
+
+  /**
+   * description field in *Message → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: message.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * scriptures field in *Message → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: message.default.primary.scriptures
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  scriptures: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Message Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MessageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MessageSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Message*
+ */
+type MessageSliceVariation = MessageSliceDefault;
+
+/**
+ * Message Shared Slice
+ *
+ * - **API ID**: `message`
+ * - **Description**: Message
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MessageSlice = prismic.SharedSlice<
+  "message",
+  MessageSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -283,12 +446,19 @@ declare module "@prismicio/client" {
       EventsDocumentDataSlicesSlice,
       FootDocument,
       FootDocumentData,
+      MediaCenterDocument,
+      MediaCenterDocumentData,
+      MediaCenterDocumentDataSlicesSlice,
       AllDocumentTypes,
       EventSlice,
       EventSliceDefaultPrimaryTagsItem,
       EventSliceDefaultPrimary,
       EventSliceVariation,
       EventSliceDefault,
+      MessageSlice,
+      MessageSliceDefaultPrimary,
+      MessageSliceVariation,
+      MessageSliceDefault,
     };
   }
 }
