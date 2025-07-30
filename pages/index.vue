@@ -27,21 +27,48 @@ const pastors = ref([
 	<div class="py-5 flex flex-col md:gap-10">
 		<ContainerWrapper>
 			<div
-				class="bg-black text-white p-10 rounded-3xl flex flex-col items-start gap-3"
+				class="relative bg-black text-white rounded-3xl overflow-hidden"
 			>
-				<div class="flex flex-col gap-2">
-					<h1>Raising</h1>
-					<h1>Successful</h1>
-					<h1>Godly</h1>
-					<h1>Lights</h1>
+				<!-- Background video -->
+				<video
+					autoplay
+					muted
+					loop
+					playsinline
+					class="!absolute inset-0 w-full h-full object-cover z-0"
+				>
+					<source
+						src="../src/assets/videos/bg.mp4"
+						type="video/mp4"
+					/>
+					Your browser does not support the video tag.
+				</video>
+
+				<!-- Gradient overlay -->
+				<div
+					class="!absolute inset-0 bg-gradient-to-r from-black/80 to-transparent z-10"
+				></div>
+
+				<!-- Content -->
+				<div class="relative z-20 flex flex-col items-start gap-3 p-10">
+					<div class="flex flex-col gap-2">
+						<h1 class="text-4xl font-bold">Raising</h1>
+						<h1 class="text-4xl font-bold">Successful</h1>
+						<h1 class="text-4xl font-bold">Godly</h1>
+						<h1 class="text-4xl font-bold">Lights</h1>
+					</div>
+					<p class="md:w-2/5 mt-10">
+						Welcome to a place where the gospel is central and Jesus
+						is always the lead story. We are a Jesus church and want
+						to gather in worship and scatter to shine His light and
+						love throughout the city and beyond.
+					</p>
+					<button
+						class="mt-4 px-6 py-2 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition"
+					>
+						Learn More
+					</button>
 				</div>
-				<p class="md:w-2/5 mt-10">
-					Welcome to a place where the gospel is central and Jesus is
-					always the lead story. We are a Jesus church and want to
-					gather in worship and scatter to shine His light and love
-					throughout the city and beyond.
-				</p>
-				<button>Learn More</button>
 			</div>
 		</ContainerWrapper>
 
@@ -90,7 +117,7 @@ const pastors = ref([
 				<div class="flex flex-col-reverse md:flex-row gap-3">
 					<div class="flex-1 mt-72 md:mt-0">
 						<h1
-							class="!font-bold mb-12 md:!absolute md:-top-18 md:left-24 text-primary-blue"
+							class="!font-bold mb-12 md:!absolute md:-top-18 md:left-24 text-primary-blue tight"
 						>
 							Join Us
 						</h1>

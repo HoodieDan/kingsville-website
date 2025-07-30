@@ -51,7 +51,7 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 								<h6
 									class="font-dark-grey mb-3 text-primary-orange"
 								>
-									Thursdays (Online)
+									Thursdays
 								</h6>
 								<p>
 									Every week from 6:45 PM to 8:00 PM
