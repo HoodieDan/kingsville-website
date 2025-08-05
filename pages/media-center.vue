@@ -1,9 +1,15 @@
 <template>
 	<div>
-		<ContainerWrapper class="py-32">
-			<div class="bg-grey rounded-lg p-8 pt-20">
+		<ContainerWrapper class="py-5">
+			<div class="text-center mb-10">
+				<h1 class="text-4xl font-bold mb-4 text-primary-blue">Media Center</h1>
+				<p class="text-lg text-gray-700 max-w-2xl mx-auto">
+					Experience inspiring messages through audio and video. Watch or listen to recent sermons, teachings, and special events. Let these resources encourage your faith and deepen your walk with God.
+				</p>
+			</div>
+			<div class="bg-grey rounded-lg p-8">
 				<div class="mb-6">
-					<h1 class="tight !absolute -top-32">Previous Messages</h1>
+					<h1 class="mb-3">Previous Messages</h1>
 					<p>
 						Dive into Spirit-led teachings and timeless truth. This
 						is more than media—it's fuel for your walk with God and
@@ -11,8 +17,10 @@
 					</p>
 				</div>
 
-				<div class="w-full flex flex-col justify-center items-center mb-8">
-                    <h5 class="text-center !not-italic !font-bold">Search Messages</h5>
+				<div
+					class="w-full flex flex-col justify-center items-center mb-8"
+				>
+					<h5 class="text-center !font-bold">Search Messages</h5>
 					<input
 						v-model="searchQuery"
 						type="text"
@@ -47,12 +55,10 @@
 							<p class="text-sm text-gray-500">
 								{{ formatDate(item.primary.date) }}
 							</p>
-							<h5
-								class="!font-semibold !font-zenith text-primary-blue"
-							>
+							<h5 class="!font-semibold text-primary-blue">
 								{{ item.primary.message_title }}
 							</h5>
-							<p class="text-gray-600 italic">
+							<p class="text-gray-600">
 								Minister: {{ item.primary.minister }}
 							</p>
 							<p class="text-gray-700">
@@ -73,11 +79,14 @@
 import { ref, computed } from "vue";
 import ContainerWrapper from "~/src/components/container-wrapper.vue";
 import { format } from "date-fns";
+import { useQuery } from '@tanstack/vue-query';
 
 const prismic = usePrismic();
-const { data, pending } = await useAsyncData("media_center", () =>
-	prismic.client.getSingle("media_center")
-);
+
+const { data, isPending: pending } = useQuery({
+	queryKey: ['media_center'],
+	queryFn: () => prismic.client.getSingle('media_center'),
+});
 
 // Search state
 const searchQuery = ref("");

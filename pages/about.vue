@@ -10,10 +10,11 @@ useScrollAnimations();
 		<ContainerWrapper>
 			<div class="flex flex-col-reverse md:flex-row">
 				<div class="w-full md:w-5/12 p-5">
-					<h2 class="!font-bold mb-5 text-primary-blue t__reveal__animate">
+					<h2
+						class="!font-bold mb-5 text-primary-blue t__reveal__animate"
+					>
 						Who we
-						<span
-							class="!font-normal !font-zenith italic text-primary-orange"
+						<span class="!font-normal text-primary-orange"
 							>are</span
 						>
 					</h2>
@@ -31,13 +32,13 @@ useScrollAnimations();
 					<div class="mt-6">
 						<div class="mt-2">
 							<h5
-								class="!font-zenith !font-normal mb-4 text-primary-blue t__reveal__animate"
+								class="!font-bold mb-4 text-primary-blue t__reveal__animate"
 							>
 								Service Times
 							</h5>
 							<div>
 								<h6
-									class="font-dark-grey mb-3 text-primary-orange t__reveal__animate"
+									class="mb-3 text-primary-orange t__reveal__animate"
 								>
 									Sundays
 								</h6>
@@ -50,7 +51,7 @@ useScrollAnimations();
 							</div>
 							<div class="mt-4">
 								<h6
-									class="font-dark-grey mb-3 text-primary-orange t__reveal__animate"
+									class="mb-3 text-primary-orange t__reveal__animate"
 								>
 									Thursdays
 								</h6>
@@ -63,7 +64,7 @@ useScrollAnimations();
 					<div class="mt-6">
 						<div class="mt-2">
 							<h5
-								class="!font-zenith !font-normal mb-4 text-primary-blue t__reveal__animate"
+								class="!font-bold mb-4 text-primary-blue t__reveal__animate"
 							>
 								Locations
 							</h5>
@@ -71,7 +72,9 @@ useScrollAnimations();
 								2 Akinwunmi Street, off Hughes Ave,
 								Alagomeji-Yaba, Lagos
 							</p>
-							<p class="t__fade__animate">101 Okota Road, Okota, Lagos 102214, Lagos.</p>
+							<p class="t__fade__animate">
+								101 Okota Road, Okota, Lagos 102214, Lagos.
+							</p>
 						</div>
 					</div>
 				</div>
@@ -97,17 +100,17 @@ useScrollAnimations();
 					/>
 				</div>
 				<div class="w-full md:w-2/3 p-10">
-					<h5 class="!font-zenith text-primary-orange mb-5 t__reveal__animate">
+					<h5 class="text-primary-orange mb-5 t__reveal__animate">
 						Our Passion
 					</h5>
-					<h4 class="my-7 !font-bold text-primary-blue t__reveal__animate">
+					<h4
+						class="my-7 !font-bold text-primary-blue t__reveal__animate"
+					>
 						The future we're building
 					</h4>
 					<p class="t__fade__animate">
 						4 Pillars of Kingsville Church: We are passionate about
-						<span class="!font-zenith italic"
-							>‘…raising successful godly lights’</span
-						>
+						<span class="">‘…raising successful godly lights’</span>
 						in their:
 					</p>
 					<ul class="mt-4">
@@ -123,10 +126,12 @@ useScrollAnimations();
 		<ContainerWrapper class="mt-24">
 			<div class="flex flex-col-reverse md:flex-row md:items-center">
 				<div class="w-full md:w-2/3 p-10">
-					<h5 class="!font-zenith text-primary-orange mb-5 t__reveal__animate">
+					<h5 class="text-primary-orange mb-5 t__reveal__animate">
 						Our Vision
 					</h5>
-					<h4 class="my-7 !font-bold text-primary-blue t__fade__animate">
+					<h4
+						class="my-7 !font-bold text-primary-blue t__fade__animate"
+					>
 						Our Daily Pursuit
 					</h4>
 					<p class="t__fade__animate">
@@ -138,9 +143,15 @@ useScrollAnimations();
 
 					<h6 class="mt-4">Our church is:</h6>
 					<ul class="mt-2">
-						<li class="t__reveal__animate">A soul-winning church</li>
-						<li class="t__reveal__animate">A word-of-faith church</li>
-						<li class="t__reveal__animate">A spirit-filled church</li>
+						<li class="t__reveal__animate">
+							A soul-winning church
+						</li>
+						<li class="t__reveal__animate">
+							A word-of-faith church
+						</li>
+						<li class="t__reveal__animate">
+							A spirit-filled church
+						</li>
 						<li class="t__reveal__animate">
 							Making a difference as a lighthouse through the love
 							of God
@@ -175,10 +186,12 @@ useScrollAnimations();
 					/>
 				</div>
 				<div class="w-full md:w-2/3 p-10">
-					<h5 class="!font-zenith text-primary-orange mb-5 t__reveal__animate">
+					<h5 class="text-primary-orange mb-5 t__reveal__animate">
 						Our Core Values
 					</h5>
-					<h4 class="my-7 !font-bold text-primary-blue t__fade__animate">
+					<h4
+						class="my-7 !font-bold text-primary-blue t__fade__animate"
+					>
 						Living the Kingsville way
 					</h4>
 					<p class="t__fade__animate">
@@ -189,27 +202,25 @@ useScrollAnimations();
 					</p>
 					<ul class="mt-4">
 						<li class="t__reveal__animate">
-							<span class="!font-zenith italic">S</span
-							>pirituality
+							<span class="">S</span>pirituality
 						</li>
 						<li class="t__reveal__animate">
-							<span class="!font-zenith italic">E</span>xcellence
+							<span class="">E</span>xcellence
 						</li>
 						<li class="t__reveal__animate">
-							<span class="!font-zenith italic">A</span
-							>ccountability
-						</li>
-						<li class="t__reveal__animate"><span class="!font-zenith italic">G</span>rowth</li>
-						<li class="t__reveal__animate">
-							<span class="!font-zenith italic">R</span
-							>esponsibility
+							<span class="">A</span>ccountability
 						</li>
 						<li class="t__reveal__animate">
-							<span class="!font-zenith italic">I</span>ntegrity
+							<span class="">G</span>rowth
 						</li>
 						<li class="t__reveal__animate">
-							<span class="!font-zenith italic">P</span
-							>eople-friendliness
+							<span class="">R</span>esponsibility
+						</li>
+						<li class="t__reveal__animate">
+							<span class="">I</span>ntegrity
+						</li>
+						<li class="t__reveal__animate">
+							<span class="">P</span>eople-friendliness
 						</li>
 					</ul>
 				</div>
@@ -217,13 +228,12 @@ useScrollAnimations();
 		</ContainerWrapper>
 
 		<ContainerWrapper>
-			<div class="flex flex-col-reverse md:flex-row">
+			<div class="flex flex-col-reverse md:flex-row md:items-center">
 				<div class="w-full md:w-7/12 p-5">
-					<h2 class="!font-bold mb-5 text-primary-blue">
+					<h2 class="!font-normal mb-5 text-primary-blue">
 						Meet
-						<span
-							class="!font-normal !font-zenith italic text-primary-orange"
-							>Reverend Paul Rotua</span
+						<span class="!font-bold text-primary-orange"
+							>Rev. Paul Rotua</span
 						>
 					</h2>
 					<p class="t__fade__animate">
@@ -257,10 +267,10 @@ useScrollAnimations();
 					</p>
 				</div>
 				<div
-					class="w-full md:w-5/12 h-[35rem] bg-placeholder rounded-md"
+					class="w-full md:w-5/12 h-[30rem] bg-placeholder rounded-md"
 				>
 					<img
-						src="../public/images/meet-rev.jpeg"
+						src="../public/images/meet-rev.jpg"
 						alt="Reverend Paul Rotua"
 						class="w-full h-full object-cover rounded-md t__clip__animate"
 					/>

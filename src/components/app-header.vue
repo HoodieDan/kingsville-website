@@ -40,7 +40,9 @@ const toggleNav = () => {
 					<NuxtLink to="/" class="link">Home</NuxtLink>
 					<NuxtLink to="/about" class="link">About</NuxtLink>
 					<NuxtLink to="/events" class="link">Events</NuxtLink>
-					<NuxtLink to="/media-center" class="link">Media Center</NuxtLink>
+					<NuxtLink to="/media-center" class="link"
+						>Media Center</NuxtLink
+					>
 					<NuxtLink to="/contact" class="link">Contact</NuxtLink>
 				</div>
 			</ContainerWrapper>
@@ -148,7 +150,7 @@ const toggleNav = () => {
 							</div>
 
 							<div
-								class="flex flex-col gap-10 justify-between items-start p-10 md:p-48 !font-zenith italic text-2xl md:text-7xl"
+								class="flex flex-col gap-10 justify-between items-start p-10 md:p-48 text-2xl md:text-7xl"
 							>
 								<div class="nav-link">
 									<NuxtLink

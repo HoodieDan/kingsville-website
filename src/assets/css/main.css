@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --font-zenith: "Zenith";
-  --font-satoshi: "Satoshi";
+	--font-zenith: "Zenith";
+	--font-satoshi: "Satoshi";
+	--font-dosis: "Dosis";
 
-  --color-white: #FFF;
-  --color-black: #000;
-  --color-grey: #E3E3E3;
-  --color-dark-grey: #231f20;
-  --color-primary-blue: #28166f;
-  --color-primary-orange: #dc6726;
-  --color-placeholder: #A3A3A3;
+	--color-white: #fff;
+	--color-black: #000;
+	--color-grey: #e3e3e3;
+	--color-dark-grey: #231f20;
+	--color-primary-blue: #28166f;
+	--color-primary-orange: #dc6726;
+	--color-placeholder: #a3a3a3;
 }

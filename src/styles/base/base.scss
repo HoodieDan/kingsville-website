@@ -33,15 +33,15 @@ p {
 
 	&.big {
 		$vw: 100vw;
-		font-size: calc($vw / 1920px * 24px);
+		font-size: calc($vw / 1920px * 26px);
 
 		@include media("<phone") {
-			font-size: calc($vw / 750px * 20px);
+			font-size: calc($vw / 750px * 22px);
 			overflow-x: hidden;
 		}
 
 		@include media("<small") {
-			font-size: calc($vw / 500px * 20px);
+			font-size: calc($vw / 500px * 22px);
 		}
 	}
 
@@ -84,14 +84,14 @@ h1 {
 	font-weight: 700;
 	line-height: 0.9;
 	$vw: 100vw;
-	font-size: calc($vw / 1920px * 150px);
+	font-size: calc($vw / 1920px * 80px);
 
 	@include media("<phone") {
-		font-size: calc($vw / 750px * 100px);
+		font-size: calc($vw / 750px * 80px);
 	}
 
 	@include media("<small") {
-		font-size: calc($vw / 500px * 70px);
+		font-size: calc($vw / 500px * 50px);
 	}
 
 	&.big {
@@ -110,24 +110,24 @@ h1 {
 h2 {
 	font-weight: 400;
 	$vw: 100vw;
-	font-size: calc($vw / 1920px * 90px);
+	font-size: calc($vw / 1920px * 70px);
 
 	@include media("<phone") {
-		font-size: calc($vw / 750px * 78px);
+		font-size: calc($vw / 750px * 68px);
 	}
 
 	@include media("<small") {
-		font-size: calc($vw / 500px * 78px);
+		font-size: calc($vw / 500px * 40px);
 	}
 }
 
 h3 {
 	font-weight: 400;
 	$vw: 100vw;
-	font-size: calc($vw / 1920px * 65px);
+	font-size: calc($vw / 1920px * 55px);
 
 	@include media("<phone") {
-		font-size: calc($vw / 750px * 35px);
+		font-size: calc($vw / 750px * 55px);
 	}
 
 	@include media("<small") {
@@ -152,7 +152,6 @@ h4 {
 h5 {
 	font-weight: 400;
 	$vw: 100vw;
-	font-style: italic;
 	font-size: calc($vw / 1920px * 35px);
 
 	@include media("<phone") {
@@ -220,7 +219,7 @@ textarea {
 	padding: 1rem;
 	margin-bottom: 1rem;
 	margin-top: 0.5rem;
-	font-family: $font-satoshi;
+	font-family: $font-dosis;
 	$vw: 100vw;
 	font-size: calc($vw / 1920px * 18px);
 	background: transparent;

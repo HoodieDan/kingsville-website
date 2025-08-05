@@ -3,14 +3,14 @@ import ContainerWrapper from "~/src/components/container-wrapper.vue";
 import SwiperCarousel from "~/src/components/swiper-carousel.vue";
 import { SwiperSlide } from "swiper/vue";
 import revMrsImage from "~/public/images/rev-mrs.jpg";
-import revImage from "~/public/images/rev.jpeg";
+import revImage from "~/public/images/rev.jpg";
 import { useScrollAnimations } from "~/src/composables/useScrollAnimation";
 
 useScrollAnimations();
 
 const pastors = ref([
 	{
-		name: "Reverend Paul Rotua",
+		name: "Rev. Paul Rotua",
 		title: "Senior Pastor",
 		image: revImage,
 		summary:
@@ -28,83 +28,74 @@ const pastors = ref([
 
 <template>
 	<div class="py-5 flex flex-col md:gap-10">
-		<ContainerWrapper>
-			<div
-				class="hero__div relative bg-black text-white rounded-3xl overflow-hidden"
-				style="clip-path: inset(100% 0 0 0)"
-			>
-				<!-- Background video -->
-				<video
-					autoplay
-					muted
-					loop
-					playsinline
-					class="!absolute inset-0 w-full h-full object-cover z-0"
-				>
-					<source
-						src="../src/assets/videos/bg.mp4"
-						type="video/mp4"
-					/>
-					Your browser does not support the video tag.
-				</video>
-
-				<!-- Gradient overlay -->
+		<div class="h-[45rem] md:h-screen w-screen md:px-10 pb-20">
+			<ContainerWrapper class="h-full w-full">
 				<div
-					class="!absolute inset-0 bg-gradient-to-r from-black/80 to-transparent z-10"
-				></div>
+					class="hero__div relative bg-black text-white rounded-3xl overflow-hidden h-full w-full"
+					style="clip-path: inset(100% 0 0 0)"
+				>
+					<!-- Background video -->
+					<video
+						autoplay
+						muted
+						loop
+						playsinline
+						class="!absolute inset-0 w-full h-full object-cover z-0"
+					>
+						<source
+							src="../src/assets/videos/bg.mp4"
+							type="video/mp4"
+						/>
+						Your browser does not support the video tag.
+					</video>
 
-				<!-- Content -->
-				<div class="relative z-20 flex flex-col items-start gap-3 p-10">
-					<div class="flex flex-col gap-2">
-						<h1
-							class="text-4xl font-bold t-animate hero__title"
+					<!-- Gradient overlay -->
+					<div
+						class="!absolute inset-0 bg-gradient-to-r from-black/80 to-transparent z-10"
+					></div>
+
+					<!-- Content -->
+					<div
+						class="!absolute bottom-0 z-20 flex flex-col items-start gap-3 p-10"
+					>
+						<div class="flex flex-col gap-2">
+							<h1
+								class="text-4xl font-bold t-animate hero__title"
+								style="transform: translateY(100%); opacity: 0"
+							>
+								Raising Successful
+							</h1>
+							<h1
+								class="text-4xl font-bold t-animate hero__title"
+								style="transform: translateY(100%); opacity: 0"
+							>
+								Godly Lights
+							</h1>
+						</div>
+						<p
+							class="md:w-2/5 mt-10 hero__p"
 							style="transform: translateY(100%); opacity: 0"
 						>
-							Raising
-						</h1>
-						<h1
-							class="text-4xl font-bold t-animate hero__title"
-							style="transform: translateY(100%); opacity: 0"
+							Welcome to a place where the gospel is central and
+							Jesus is always the lead story. We are a Jesus
+							church and want to gather in worship and scatter to
+							shine His light and love throughout the city and
+							beyond.
+						</p>
+						<button
+							class="mt-4 px-6 py-2 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition"
 						>
-							Successful
-						</h1>
-						<h1
-							class="text-4xl font-bold t-animate hero__title"
-							style="transform: translateY(100%); opacity: 0"
-						>
-							Godly
-						</h1>
-						<h1
-							class="text-4xl font-bold t-animate hero__title"
-							style="transform: translateY(100%); opacity: 0"
-						>
-							Lights
-						</h1>
+							Learn More
+						</button>
 					</div>
-					<p
-						class="md:w-2/5 mt-10 hero__p"
-						style="transform: translateY(100%); opacity: 0"
-					>
-						Welcome to a place where the gospel is central and Jesus
-						is always the lead story. We are a Jesus church and want
-						to gather in worship and scatter to shine His light and
-						love throughout the city and beyond.
-					</p>
-					<button
-						class="mt-4 px-6 py-2 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition"
-					>
-						Learn More
-					</button>
 				</div>
-			</div>
-		</ContainerWrapper>
+			</ContainerWrapper>
+		</div>
 
-		<ContainerWrapper class="mt-24">
+		<ContainerWrapper>
 			<h2 class="!font-bold text-primary-blue t__reveal__animate">
 				Visit any of our
-				<span class="font-zenith italic font-normal text-primary-orange"
-					>Branches</span
-				>
+				<span class="font-normal text-primary-orange">Branches</span>
 			</h2>
 			<p class="font-semibold mt-4 t__fade__animate">
 				Our roots are in Yaba and Okota though we are reaching the
@@ -112,7 +103,7 @@ const pastors = ref([
 			</p>
 			<div class="flex gap-30 md:gap-10 mt-5 flex-col md:flex-row">
 				<div class="md:flex-1">
-					<div class="h-96 w-full flex flex-col gap-3">
+					<div class="h-screen w-full flex flex-col gap-3">
 						<img
 							src="../public/images/kvc-alagomeji.jpeg"
 							alt="kingsville church Yaba"
@@ -130,7 +121,7 @@ const pastors = ref([
 					</div>
 				</div>
 				<div class="md:flex-1">
-					<div class="h-96 w-full flex flex-col gap-3">
+					<div class="h-screen w-full flex flex-col gap-3">
 						<img
 							src="../public/images/kvc-okota.jpg"
 							alt="kingsville church alagomeji"
@@ -149,30 +140,22 @@ const pastors = ref([
 			</div>
 		</ContainerWrapper>
 
-		<ContainerWrapper class="mt-72">
+		<ContainerWrapper class="mt-12">
 			<div class="bg-grey rounded-lg relative p-10">
-				<div class="flex flex-col-reverse md:flex-row gap-3">
+				<div
+					class="flex flex-col-reverse md:flex-row items-center gap-3"
+				>
 					<div class="flex-1 mt-72 md:mt-0">
-						<h1
-							class="!font-bold mb-12 md:!absolute md:-top-18 md:left-24 text-primary-blue tight t__reveal__animate"
-						>
-							Join Us
-						</h1>
 						<div
 							class="md:pt-20 md:px-24 md:-pb-12 relative bottom-10"
 						>
 							<h2
-								class="font-zenith !font-normal text-primary-orange t__reveal__animate"
+								class="!font-bold text-primary-orange t__reveal__animate"
 							>
-								in Church
-							</h2>
-							<h2
-								class="font-zenith !font-normal italic text-primary-orange t__reveal__animate"
-							>
-								Online
+								Join Us Online
 							</h2>
 							<p class="mt-3 t__fade__animate">
-								Join us every Sunday at 9:00 AM and 11:15 AM in
+								Join us every Sunday at 9:00 AM and 11:30 AM in
 								church or you can join our service online and
 								stream from wherever you are.
 							</p>
@@ -180,9 +163,7 @@ const pastors = ref([
 						</div>
 					</div>
 					<div class="flex-1 relative">
-						<div
-							class="bg-placeholder w-full lg:h-[32rem] md:h-[32rem] h-96 !absolute -top-32 md:-top-48 rounded-lg"
-						>
+						<div class="bg-placeholder w-full h-full rounded-lg">
 							<img
 								src="../public/images/join-us.jpeg"
 								alt="join us"
@@ -196,8 +177,12 @@ const pastors = ref([
 
 		<ContainerWrapper class="mt-24">
 			<div class="bg-grey rounded-lg p-8">
-				<h2 class="!font-bold text-primary-blue t__reveal__animate">Our Leadership</h2>
-				<div class="lg:px-10 lg:pt-10">
+				<h2
+					class="!font-bold text-primary-blue t__reveal__animate lg:px-10"
+				>
+					Our Leadership
+				</h2>
+				<div class="lg:px-10">
 					<swiper-carousel
 						:slides-per-view="1"
 						:space-between="0"
@@ -222,7 +207,9 @@ const pastors = ref([
 									>
 										{{ pastor.name }}
 									</h3>
-									<p class="mt-3 font-semibold">{{ pastor.summary }}</p>
+									<p class="mt-3">
+										{{ pastor.summary }}
+									</p>
 								</div>
 								<div class="flex-1">
 									<div

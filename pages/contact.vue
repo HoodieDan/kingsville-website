@@ -30,7 +30,7 @@ const handleFormSubmit = () => {
 						Let's connect —
 					</h2>
 					<h2
-						class="!font-zenith !font-bold italic text-primary-orange t__reveal__animate"
+						class="!font-bold text-primary-orange t__reveal__animate"
 					>
 						We're here for you
 					</h2>
@@ -55,7 +55,7 @@ const handleFormSubmit = () => {
 									class="size-6 text-primary-orange"
 								/>
 								<h5
-									class="!font-zenith !font-normal text-primary-blue t__reveal__animate"
+									class="!font-normal text-primary-blue t__reveal__animate"
 								>
 									Our Addresses
 								</h5>
@@ -78,7 +78,7 @@ const handleFormSubmit = () => {
 									class="size-6 text-primary-orange"
 								/>
 								<h5
-									class="!font-zenith !font-normal text-primary-blue t__reveal__animate"
+									class="!font-normal text-primary-blue t__reveal__animate"
 								>
 									Email Us
 								</h5>
@@ -99,7 +99,7 @@ const handleFormSubmit = () => {
 									class="size-6 text-primary-orange"
 								/>
 								<h5
-									class="!font-zenith !font-normal text-primary-blue t__reveal__animate"
+									class="!font-normal text-primary-blue t__reveal__animate"
 								>
 									Call Us
 								</h5>
@@ -118,8 +118,7 @@ const handleFormSubmit = () => {
 				<div class="w-full md:w-5/12">
 					<h4 class="mb-7 text-primary-blue t__reveal__animate">
 						Send a
-						<span
-							class="font-zenith italic text-primary-orange underline"
+						<span class="text-primary-orange underline"
 							>message</span
 						>
 					</h4>

@@ -1,29 +1,32 @@
 <template>
 	<div>
-		<ContainerWrapper class="py-20">
-            <div class="flex flex-col-reverse md:flex-row mb-15 md:mb-56">
-                <div class="w-full md:w-2/5 relative mt-5 md:mt-0 md:pb-40">
-                    <h1 class="tight big md:!absolute mb-5 md:mb-0 z-50">Upcoming</h1>
-                    <div class="md:p-20 md:pt-40">
-                        <h2 class="font-zenith">at Kingsville</h2>
-                        <h2 class="font-zenith">Church</h2>
-                        <p class="mt-5">
-                            Discover upcoming events at Kingsville Church. Use the search below to find events that interest you!
-                        </p>
-                    </div>
-                </div>
-                <div class="flex-1 bg-grey rounded-lg overflow-hidden">
-                    <img src="../public/images/upcoming-events.jpeg" alt="upcoming-events" class="w-full h-full object-cover rounded-lg" />
-                </div>
-            </div>
+		<ContainerWrapper class="p-8">
+			<div class="flex flex-col-reverse md:flex-row mb-15">
+				<div class="w-full md:w-2/5 relative mt-5 md:mt-0 md:pb-40">
+					<div class="md:p-20 md:pt-40">
+						<h2 class="t__reveal__animate">
+							Upcoming Events at Kingsville Church
+						</h2>
+						<p class="mt-5 t__fade__animate">
+							Discover upcoming events at Kingsville Church. Use
+							the search below to find events that interest you!
+						</p>
+					</div>
+				</div>
+				<div class="flex-1 bg-grey rounded-lg overflow-hidden">
+					<img
+						src="../public/images/upcoming-events.jpeg"
+						alt="upcoming-events"
+						class="w-full h-full object-cover rounded-lg t__clip__animate"
+					/>
+				</div>
+			</div>
 
-        
-			<p v-if="pending">Loading...</p>
-			<div v-else class="bg-grey p-8 rounded-2xl relative">
-                <h1 class="!absolute -top-17 tight hidden md:block">Find Your Place</h1>
+			<div class="bg-grey p-8 rounded-2xl relative">
+				<h1 class="hidden md:block">Find Your Place</h1>
 				<div class="flex flex-col md:flex-row gap-15 mt-5">
 					<div class="w-full md:w-2/5 text-center md:text-left">
-						<h5 class="mb-5 md:mb-2 !font-bold !not-italic">Search</h5>
+						<h5 class="mb-5 md:mb-2 !font-bold">Search</h5>
 						<input
 							v-model="searchQuery"
 							type="text"
@@ -32,8 +35,9 @@
 						/>
 					</div>
 
+					<p v-if="pending">Loading...</p>
 					<div
-						v-if="filteredEvents.length > 0"
+						v-if="filteredEvents.length > 0 && !pending"
 						class="flex-1 space-y-8"
 					>
 						<div
@@ -57,7 +61,7 @@
 								<div
 									class="relative z-10 flex flex-col items-center justify-center h-full w-full"
 								>
-									<h4 class="!font-zenith text-white">
+									<h4 class="text-white">
 										{{
 											formatDay(
 												event.primary.date_and_time
@@ -75,7 +79,7 @@
 							</div>
 
 							<div class="text-center md:text-left flex-1">
-								<h5 class="!font-zenith mb-2">
+								<h5 class="mb-2">
 									{{ event.primary.event_name }}
 								</h5>
 								<p>
@@ -88,7 +92,7 @@
 						</div>
 					</div>
 
-					<p v-else class="flex-1">
+					<p v-if="filteredEvents.length === 0 && !pending" class="flex-1">
 						No upcoming events match your search.
 					</p>
 				</div>
@@ -100,13 +104,19 @@
 <script setup>
 import { ref, computed } from "vue";
 import ContainerWrapper from "~/src/components/container-wrapper.vue";
+import { useScrollAnimations } from "~/src/composables/useScrollAnimation";
+import { useQuery } from "@tanstack/vue-query";
+
+useScrollAnimations();
 
 const searchQuery = ref("");
 
 const prismic = usePrismic();
-const { data, pending } = await useAsyncData("events", () =>
-	prismic.client.getSingle("events")
-);
+
+const { data, isLoading: pending } = useQuery({
+	queryKey: ["events"],
+	queryFn: () => prismic.client.getSingle("events"),
+});
 
 // Filter out past events and match search
 const filteredEvents = computed(() => {

@@ -12,7 +12,53 @@ import ContainerWrapper from "./container-wrapper.vue";
 						alt="kingsville church logo"
 						class="h-15"
 					/>
-					<h4 class="!font-bold">Kingsville Church</h4>
+
+					<div class="flex gap-5">
+						<a
+							href="https://www.facebook.com/share/1CK52nBB4j/?mibextid=wwXIfr"
+							class="link"
+							target="_blank"
+							rel="noopener"
+						>
+							<UIcon
+								name="lucide:facebook"
+								class="text-md"
+							/>
+						</a>
+						<a
+							href="https://www.instagram.com/kingsvillechurchglobal?igsh=Mm9uZTV1ZW1ycGMy&utm_source=ig_contact_invite"
+							class="link"
+							target="_blank"
+							rel="noopener"
+						>
+							<UIcon
+								name="lucide:instagram"
+								class="text-md"
+							/>
+						</a>
+						<a
+							href="https://youtube.com/@kingsvillechurchlagos?si=ha27xgsETbiN2_FK"
+							class="link"
+							target="_blank"
+							rel="noopener"
+						>
+							<UIcon
+								name="lucide:youtube"
+								class="text-md"
+							/>
+						</a>
+						<a
+							href="https://x.com/kingsvillelagos?s=21"
+							class="link"
+							target="_blank"
+							rel="noopener"
+						>
+							<UIcon
+								name="lucide:twitter"
+								class="text-md"
+							/>
+						</a>
+					</div>
 					<p>Raising Successful Godly Lights.</p>
 					<NuxtLink to="/contact" class="link">
 						<button>Contact Us</button>
@@ -25,7 +71,9 @@ import ContainerWrapper from "./container-wrapper.vue";
 						<div class="flex flex-col gap-3 items-start">
 							<NuxtLink to="/" class="link">Home</NuxtLink>
 							<NuxtLink to="/about" class="link">About</NuxtLink>
-							<NuxtLink to="/events" class="link">Events</NuxtLink>
+							<NuxtLink to="/events" class="link"
+								>Events</NuxtLink
+							>
 							<NuxtLink to="/media-center" class="link"
 								>Media Center</NuxtLink
 							>
@@ -46,7 +94,9 @@ import ContainerWrapper from "./container-wrapper.vue";
 						<div class="flex flex-col gap-3 items-start">
 							<NuxtLink to="#" class="link">Choir</NuxtLink>
 							<NuxtLink to="#" class="link">Technical</NuxtLink>
-							<NuxtLink to="#" class="link">Royal Scribe</NuxtLink>
+							<NuxtLink to="#" class="link"
+								>Royal Scribe</NuxtLink
+							>
 							<NuxtLink to="#" class="link">Protocol</NuxtLink>
 							<NuxtLink to="#" class="link">Greeters</NuxtLink>
 							<NuxtLink to="#" class="link">Church 252</NuxtLink>
@@ -66,7 +116,9 @@ import ContainerWrapper from "./container-wrapper.vue";
 							<NuxtLink to="#" class="link"
 								>Livelystones Youth Fellowship</NuxtLink
 							>
-							<NuxtLink to="#" class="link">Men of Honor</NuxtLink>
+							<NuxtLink to="#" class="link"
+								>Men of Honor</NuxtLink
+							>
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,5 @@
 <template>
-	<div class="font-satoshi">
+	<div class="font-dosis">
 		<NuxtLayout>
 			<AppHeader />
 			<NuxtPage />
@@ -9,6 +9,6 @@
 </template>
 
 <script setup>
-import AppHeader from './src/components/app-header.vue';
-import AppFooter from './src/components/app-footer.vue';
+import AppHeader from "./src/components/app-header.vue";
+import AppFooter from "./src/components/app-footer.vue";
 </script>
