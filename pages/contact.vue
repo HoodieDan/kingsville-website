@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import ContainerWrapper from "~/src/components/container-wrapper.vue";
 import { reactive } from "vue";
+import { useScrollAnimations } from "~/src/composables/useScrollAnimation";
+
+useScrollAnimations();
 
 const formData = reactive({
 	name: "",
@@ -23,15 +26,15 @@ const handleFormSubmit = () => {
 		<ContainerWrapper>
 			<div class="flex flex-col md:flex-row gap-10">
 				<div class="w-full md:w-7/12">
-					<h2 class="!font-bold text-primary-blue">
+					<h2 class="!font-bold text-primary-blue t__reveal__animate">
 						Let's connect —
 					</h2>
 					<h2
-						class="!font-zenith !font-bold italic text-primary-orange"
+						class="!font-zenith !font-bold italic text-primary-orange t__reveal__animate"
 					>
 						We're here for you
 					</h2>
-					<p class="mt-4">
+					<p class="mt-4 t__fade__animate">
 						Whether you have a question, need prayer, or simply want
 						to say hello, we’d love to hear from you. At Kingsville
 						Church, we believe in doing life together — and that
@@ -39,7 +42,7 @@ const handleFormSubmit = () => {
 						any of the channels below or send us a message directly
 						through the form.
 					</p>
-					<p class="mt-2">
+					<p class="mt-2 t__fade__animate">
 						We’re ready to respond, pray with you, and walk with you
 						on your journey of faith.
 					</p>
@@ -52,16 +55,16 @@ const handleFormSubmit = () => {
 									class="size-6 text-primary-orange"
 								/>
 								<h5
-									class="!font-zenith !font-normal text-primary-blue"
+									class="!font-zenith !font-normal text-primary-blue t__reveal__animate"
 								>
 									Our Addresses
 								</h5>
 							</div>
-							<p class="mb-1 font-medium">
+							<p class="mb-1 font-medium t__fade__animate">
 								2 Akinwunmi street, off Hughes Ave,
 								Alagomeji-Yaba, Lagos
 							</p>
-							<p class="font-medium">
+							<p class="font-medium t__fade__animate">
 								101 Okota Rd, Ilasamaja, Lagos 102214, Lagos.
 							</p>
 						</div>
@@ -75,14 +78,14 @@ const handleFormSubmit = () => {
 									class="size-6 text-primary-orange"
 								/>
 								<h5
-									class="!font-zenith !font-normal text-primary-blue"
+									class="!font-zenith !font-normal text-primary-blue t__reveal__animate"
 								>
 									Email Us
 								</h5>
 							</div>
 							<a
 								href="mailto:info@kingsvillechurch.org"
-								class="link"
+								class="link t__fade__animate"
 								>info@kingsvillechurch.org</a
 							>
 						</div>
@@ -96,19 +99,19 @@ const handleFormSubmit = () => {
 									class="size-6 text-primary-orange"
 								/>
 								<h5
-									class="!font-zenith !font-normal text-primary-blue"
+									class="!font-zenith !font-normal text-primary-blue t__reveal__animate"
 								>
 									Call Us
 								</h5>
 							</div>
 							<div class="flex flex-col gap-3">
-								<a href="tel:08087132005" class="link"
+								<a href="tel:08087132005" class="link t__fade__animate"
 									>0808 713 2005</a
 								>
-								<a href="tel:08186740681" class="link"
+								<a href="tel:08186740681" class="link t__fade__animate"
 									>0818 674 0681</a
 								>
-								<a href="tel:08024352686" class="link"
+								<a href="tel:08024352686" class="link t__fade__animate"
 									>0802 435 2686</a
 								>
 							</div>
@@ -117,7 +120,7 @@ const handleFormSubmit = () => {
 				</div>
 
 				<div class="w-full md:w-5/12">
-                    <h4 class="mb-7 text-primary-blue">Send a <span class="font-zenith italic text-primary-orange underline">message</span></h4>
+                    <h4 class="mb-7 text-primary-blue t__reveal__animate">Send a <span class="font-zenith italic text-primary-orange underline">message</span></h4>
 					<form
 						class="flex flex-col gap-5"
 						@submit.prevent="handleFormSubmit"

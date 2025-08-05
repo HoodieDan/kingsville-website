@@ -37,6 +37,7 @@ const toggleNav = () => {
 		<div class="bg-grey py-2 hidden md:block">
 			<ContainerWrapper>
 				<div class="flex justify-center gap-5">
+					<NuxtLink to="/" class="link">Home</NuxtLink>
 					<NuxtLink to="/about" class="link">About</NuxtLink>
 					<!-- <NuxtLink to="#" class="link">Ministries</NuxtLink> -->
 					<NuxtLink to="/media-center" class="link">Media Center</NuxtLink>
@@ -149,6 +150,15 @@ const toggleNav = () => {
 							<div
 								class="flex flex-col gap-10 justify-between items-start p-10 md:p-48 !font-zenith italic text-2xl md:text-7xl"
 							>
+								<div class="nav-link">
+									<NuxtLink
+										to="/"
+										class="link"
+										@click="toggleNav"
+										>Home</NuxtLink
+									>
+									<div class="nav-item-wrapper"></div>
+								</div>
 								<div class="nav-link">
 									<NuxtLink
 										to="/about"

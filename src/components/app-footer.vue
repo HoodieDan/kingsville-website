@@ -36,7 +36,7 @@ import ContainerWrapper from "./container-wrapper.vue";
 					<div class="w-1/3 flex flex-col gap-5 items-start">
 						<p class="text-dark-grey">Locations</p>
 						<div class="flex flex-col gap-3 items-start">
-							<NuxtLink to="#" class="link">Alagomeji</NuxtLink>
+							<NuxtLink to="#" class="link">Yaba</NuxtLink>
 							<NuxtLink to="#" class="link">Okota</NuxtLink>
 						</div>
 					</div>
