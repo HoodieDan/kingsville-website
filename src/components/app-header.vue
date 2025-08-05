@@ -150,7 +150,7 @@ const toggleNav = () => {
 							</div>
 
 							<div
-								class="flex flex-col gap-10 justify-between items-start p-10 md:p-48 text-2xl md:text-7xl"
+								class="flex flex-col gap-10 justify-between items-start p-10 md:p-48 text-2xl md:text-6xl"
 							>
 								<div class="nav-link">
 									<NuxtLink

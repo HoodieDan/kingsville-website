@@ -1,0 +1,33 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"message_title": {
+				"__TYPE__": "FieldContent",
+				"value": "couple",
+				"type": "Text"
+			},
+			"date": {
+				"__TYPE__": "FieldContent",
+				"type": "Date",
+				"value": "2021-10-29"
+			},
+			"message_audio_link": {
+				"key": "cc015472-e509-4abc-b956-0189b0502472",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "value"
+				}
+			},
+			"minister": {
+				"__TYPE__": "FieldContent",
+				"value": "touch",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

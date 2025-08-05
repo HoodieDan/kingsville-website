@@ -145,7 +145,7 @@ const pastors = ref([
 				<div
 					class="flex flex-col-reverse md:flex-row items-center gap-3"
 				>
-					<div class="flex-1 mt-72 md:mt-0">
+					<div class="flex-1 md:mt-0">
 						<div
 							class="md:pt-20 md:px-24 md:-pb-12 relative bottom-10"
 						>

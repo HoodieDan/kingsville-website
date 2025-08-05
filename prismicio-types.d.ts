@@ -69,6 +69,71 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type AudioMessagesDocumentDataSlicesSlice = AudioMessageSlice;
+
+/**
+ * Content for Audio Messages documents
+ */
+interface AudioMessagesDocumentData {
+  /**
+   * Slice Zone field in *Audio Messages*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_messages.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<AudioMessagesDocumentDataSlicesSlice> /**
+   * Meta Title field in *Audio Messages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: audio_messages.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Audio Messages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: audio_messages.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Audio Messages*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_messages.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Audio Messages document from Prismic
+ *
+ * - **API ID**: `audio_messages`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AudioMessagesDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<AudioMessagesDocumentData>,
+    "audio_messages",
+    Lang
+  >;
+
 type EventsDocumentDataSlicesSlice = EventSlice;
 
 /**
@@ -214,9 +279,91 @@ export type MediaCenterDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | AudioMessagesDocument
   | EventsDocument
   | FootDocument
   | MediaCenterDocument;
+
+/**
+ * Primary content in *AudioMessage → Default → Primary*
+ */
+export interface AudioMessageSliceDefaultPrimary {
+  /**
+   * message title field in *AudioMessage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_message.default.primary.message_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  message_title: prismic.KeyTextField;
+
+  /**
+   * date field in *AudioMessage → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_message.default.primary.date
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * message audio link field in *AudioMessage → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_message.default.primary.message_audio_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  message_audio_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * minister field in *AudioMessage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_message.default.primary.minister
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  minister: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for AudioMessage Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AudioMessageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AudioMessageSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *AudioMessage*
+ */
+type AudioMessageSliceVariation = AudioMessageSliceDefault;
+
+/**
+ * AudioMessage Shared Slice
+ *
+ * - **API ID**: `audio_message`
+ * - **Description**: AudioMessage
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AudioMessageSlice = prismic.SharedSlice<
+  "audio_message",
+  AudioMessageSliceVariation
+>;
 
 /**
  * Item in *Event → Default → Primary → tags*
@@ -441,6 +588,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AudioMessagesDocument,
+      AudioMessagesDocumentData,
+      AudioMessagesDocumentDataSlicesSlice,
       EventsDocument,
       EventsDocumentData,
       EventsDocumentDataSlicesSlice,
@@ -450,6 +600,10 @@ declare module "@prismicio/client" {
       MediaCenterDocumentData,
       MediaCenterDocumentDataSlicesSlice,
       AllDocumentTypes,
+      AudioMessageSlice,
+      AudioMessageSliceDefaultPrimary,
+      AudioMessageSliceVariation,
+      AudioMessageSliceDefault,
       EventSlice,
       EventSliceDefaultPrimaryTagsItem,
       EventSliceDefaultPrimary,

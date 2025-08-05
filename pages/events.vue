@@ -3,8 +3,8 @@
 		<ContainerWrapper class="p-8">
 			<div class="flex flex-col-reverse md:flex-row mb-15">
 				<div class="w-full md:w-2/5 relative mt-5 md:mt-0 md:pb-40">
-					<div class="md:p-20 md:pt-40">
-						<h2 class="t__reveal__animate">
+					<div class="text-center md:text-left md:p-10 md:pt-40">
+						<h2 class="!font-bold t__reveal__animate">
 							Upcoming Events at Kingsville Church
 						</h2>
 						<p class="mt-5 t__fade__animate">

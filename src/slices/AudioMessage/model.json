@@ -1,0 +1,51 @@
+{
+  "id": "audio_message",
+  "type": "SharedSlice",
+  "name": "AudioMessage",
+  "description": "AudioMessage",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "message_title": {
+          "type": "Text",
+          "config": {
+            "label": "message title",
+            "placeholder": ""
+          }
+        },
+        "date": {
+          "type": "Date",
+          "config": {
+            "label": "date",
+            "placeholder": ""
+          }
+        },
+        "message_audio_link": {
+          "type": "Link",
+          "config": {
+            "label": "message audio link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "minister": {
+          "type": "Text",
+          "config": {
+            "label": "minister",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
