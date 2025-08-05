@@ -39,7 +39,7 @@ const toggleNav = () => {
 				<div class="flex justify-center gap-5">
 					<NuxtLink to="/" class="link">Home</NuxtLink>
 					<NuxtLink to="/about" class="link">About</NuxtLink>
-					<!-- <NuxtLink to="#" class="link">Ministries</NuxtLink> -->
+					<NuxtLink to="/events" class="link">Events</NuxtLink>
 					<NuxtLink to="/media-center" class="link">Media Center</NuxtLink>
 					<NuxtLink to="/contact" class="link">Contact</NuxtLink>
 				</div>
@@ -198,11 +198,11 @@ const toggleNav = () => {
 							</div>
 
 							<div
-								class="nav-footer !absolute -bottom-30 md:bottom-0 lg:bottom-20 left-0 w-full flex justify-between items-center py-4"
+								class="nav-footer !absolute -bottom-30 md:bottom-0 lg:bottom-40 left-0 w-full flex justify-between items-center py-4"
 							>
 								<div class="contact">
-									<a href="mailto:info@kingsvillechurch.com"
-										>info@kingsvillechurch.com</a
+									<a href="mailto:kingsvillechurch@yahoo.com"
+										>kingsvillechurch@yahoo.com</a
 									>
 								</div>
 							</div>

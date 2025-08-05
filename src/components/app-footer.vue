@@ -20,12 +20,13 @@ import ContainerWrapper from "./container-wrapper.vue";
 				</div>
 
 				<div class="flex-1 flex gap-3">
-					<div class="w-1/3 flex flex-col gap-5 items-start">
-						<p class="text-dark-grey">Our Home</p>
+					<div class="w-1/4 flex flex-col gap-5 items-start">
+						<p class="text-dark-grey">Links</p>
 						<div class="flex flex-col gap-3 items-start">
+							<NuxtLink to="/" class="link">Home</NuxtLink>
 							<NuxtLink to="/about" class="link">About</NuxtLink>
-							<!-- <NuxtLink to="#" class="link">Ministries</NuxtLink> -->
-							<NuxtLink to="#" class="link"
+							<NuxtLink to="/events" class="link">Events</NuxtLink>
+							<NuxtLink to="/media-center" class="link"
 								>Media Center</NuxtLink
 							>
 							<NuxtLink to="/contact" class="link"
@@ -33,14 +34,30 @@ import ContainerWrapper from "./container-wrapper.vue";
 							>
 						</div>
 					</div>
-					<div class="w-1/3 flex flex-col gap-5 items-start">
+					<div class="w-1/4 flex flex-col gap-5 items-start">
 						<p class="text-dark-grey">Locations</p>
 						<div class="flex flex-col gap-3 items-start">
 							<NuxtLink to="#" class="link">Yaba</NuxtLink>
 							<NuxtLink to="#" class="link">Okota</NuxtLink>
 						</div>
 					</div>
-					<div class="w-1/3 flex flex-col gap-5 items-start">
+					<div class="w-1/4 flex flex-col gap-5 items-start">
+						<p class="text-dark-grey">Ministries</p>
+						<div class="flex flex-col gap-3 items-start">
+							<NuxtLink to="#" class="link">Choir</NuxtLink>
+							<NuxtLink to="#" class="link">Technical</NuxtLink>
+							<NuxtLink to="#" class="link">Royal Scribe</NuxtLink>
+							<NuxtLink to="#" class="link">Protocol</NuxtLink>
+							<NuxtLink to="#" class="link">Greeters</NuxtLink>
+							<NuxtLink to="#" class="link">Church 252</NuxtLink>
+							<NuxtLink to="#" class="link">Benevolence</NuxtLink>
+							<NuxtLink to="#" class="link">Marshal</NuxtLink>
+							<NuxtLink to="#" class="link">Ushering</NuxtLink>
+							<NuxtLink to="#" class="link">Finance</NuxtLink>
+							<NuxtLink to="#" class="link">Maintenance</NuxtLink>
+						</div>
+					</div>
+					<div class="w-1/4 flex flex-col gap-5 items-start">
 						<p class="text-dark-grey">Families</p>
 						<div class="flex flex-col gap-3 items-start">
 							<NuxtLink to="#" class="link"
@@ -49,7 +66,7 @@ import ContainerWrapper from "./container-wrapper.vue";
 							<NuxtLink to="#" class="link"
 								>Livelystones Youth Fellowship</NuxtLink
 							>
-							<NuxtLink to="#" class="link">Men on Fire</NuxtLink>
+							<NuxtLink to="#" class="link">Men of Honor</NuxtLink>
 						</div>
 					</div>
 				</div>

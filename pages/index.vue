@@ -91,7 +91,7 @@ const pastors = ref([
 						love throughout the city and beyond.
 					</p>
 					<button
-						class="mt-4 px-6 py-2 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition t__fade__animate"
+						class="mt-4 px-6 py-2 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition"
 					>
 						Learn More
 					</button>
@@ -124,7 +124,7 @@ const pastors = ref([
 							Yaba
 						</h3>
 						<p class="t__fade__animate">
-							2 Akinwunmi street, off Hughes Ave, Alagomeji-Yaba,
+							2 Akinwunmi Street, off Hughes Ave, Alagomeji-Yaba,
 							Lagos
 						</p>
 					</div>
@@ -142,7 +142,7 @@ const pastors = ref([
 							Okota
 						</h3>
 						<p class="t__fade__animate">
-							101 Okota Rd, Ilasamaja, Lagos 102214, Lagos.
+							101 Okota Road, Okota, Lagos 102214, Lagos.
 						</p>
 					</div>
 				</div>
@@ -176,7 +176,7 @@ const pastors = ref([
 								church or you can join our service online and
 								stream from wherever you are.
 							</p>
-							<button class="mt-4 t__fade__animate">Watch Online</button>
+							<button class="mt-4">Watch Online</button>
 						</div>
 					</div>
 					<div class="flex-1 relative">
@@ -222,7 +222,7 @@ const pastors = ref([
 									>
 										{{ pastor.name }}
 									</h3>
-									<p class="mt-3">{{ pastor.summary }}</p>
+									<p class="mt-3 font-semibold">{{ pastor.summary }}</p>
 								</div>
 								<div class="flex-1">
 									<div

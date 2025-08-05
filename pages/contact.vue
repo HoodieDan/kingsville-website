@@ -12,7 +12,7 @@ const formData = reactive({
 });
 
 const handleFormSubmit = () => {
-	const mailto = `mailto:info@kingsvillechurch.org?subject=${encodeURIComponent(
+	const mailto = `mailto:kingsvillechurch@yahoo.com?subject=${encodeURIComponent(
 		formData.subject
 	)}&body=${encodeURIComponent(
 		`Hi Kingsville,\n\n${formData.message}\n\nBest regards,\n${formData.name}`
@@ -61,11 +61,11 @@ const handleFormSubmit = () => {
 								</h5>
 							</div>
 							<p class="mb-1 font-medium t__fade__animate">
-								2 Akinwunmi street, off Hughes Ave,
+								2 Akinwunmi Street, off Hughes Ave,
 								Alagomeji-Yaba, Lagos
 							</p>
 							<p class="font-medium t__fade__animate">
-								101 Okota Rd, Ilasamaja, Lagos 102214, Lagos.
+								101 Okota Road, Okota, Lagos 102214, Lagos.
 							</p>
 						</div>
 					</div>
@@ -84,9 +84,9 @@ const handleFormSubmit = () => {
 								</h5>
 							</div>
 							<a
-								href="mailto:info@kingsvillechurch.org"
+								href="mailto:kingsvillechurch@yahoo.com"
 								class="link t__fade__animate"
-								>info@kingsvillechurch.org</a
+								>kingsvillechurch@yahoo.com</a
 							>
 						</div>
 					</div>
@@ -105,14 +105,10 @@ const handleFormSubmit = () => {
 								</h5>
 							</div>
 							<div class="flex flex-col gap-3">
-								<a href="tel:08087132005" class="link t__fade__animate"
-									>0808 713 2005</a
-								>
-								<a href="tel:08186740681" class="link t__fade__animate"
-									>0818 674 0681</a
-								>
-								<a href="tel:08024352686" class="link t__fade__animate"
-									>0802 435 2686</a
+								<a
+									href="tel:07063685623"
+									class="link t__fade__animate"
+									>0706 368 5623</a
 								>
 							</div>
 						</div>
@@ -120,7 +116,13 @@ const handleFormSubmit = () => {
 				</div>
 
 				<div class="w-full md:w-5/12">
-                    <h4 class="mb-7 text-primary-blue t__reveal__animate">Send a <span class="font-zenith italic text-primary-orange underline">message</span></h4>
+					<h4 class="mb-7 text-primary-blue t__reveal__animate">
+						Send a
+						<span
+							class="font-zenith italic text-primary-orange underline"
+							>message</span
+						>
+					</h4>
 					<form
 						class="flex flex-col gap-5"
 						@submit.prevent="handleFormSubmit"

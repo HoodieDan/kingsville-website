@@ -42,12 +42,10 @@ useScrollAnimations();
 									Sundays
 								</h6>
 								<p class="t__fade__animate">
-									English Language Service at 9:00 AM to 11:15
-									AM
+									First Service at 9:00 AM
 								</p>
 								<p class="t__fade__animate">
-									Yoruba Language Service at 11:30 AM to 1:00
-									PM
+									Second Service at 11:30 AM
 								</p>
 							</div>
 							<div class="mt-4">
@@ -57,7 +55,7 @@ useScrollAnimations();
 									Thursdays
 								</h6>
 								<p class="t__fade__animate">
-									Every week from 6:45 PM to 8:00 PM
+									From 6:30 PM to 8:00 PM
 								</p>
 							</div>
 						</div>
@@ -70,10 +68,10 @@ useScrollAnimations();
 								Locations
 							</h5>
 							<p class="mb-1 t__fade__animate">
-								2 Akinwunmi street, off Hughes Ave,
+								2 Akinwunmi Street, off Hughes Ave,
 								Alagomeji-Yaba, Lagos
 							</p>
-							<p class="t__fade__animate">101 Okota Rd, Ilasamaja, Lagos 102214, Lagos.</p>
+							<p class="t__fade__animate">101 Okota Road, Okota, Lagos 102214, Lagos.</p>
 						</div>
 					</div>
 				</div>
