@@ -147,7 +147,7 @@ const pastors = ref([
 				>
 					<div class="flex-1 md:mt-0">
 						<div
-							class="md:pt-20 md:px-24 md:-pb-12 relative bottom-10"
+							class="md:pt-20 md:px-24 md:-pb-12"
 						>
 							<h2
 								class="!font-bold text-primary-orange t__reveal__animate"
