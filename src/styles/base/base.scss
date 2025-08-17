@@ -11,8 +11,7 @@ body {
   line-height: 1;
   scroll-behavior: smooth;
   background-color: #f0f0f0;
-  height: 100%; // ✅ force window scrolling
-  min-height: 100%;
+  height: auto;
   overflow-x: hidden;
   letter-spacing: normal;
   word-spacing: normal;
