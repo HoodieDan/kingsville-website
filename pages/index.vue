@@ -43,7 +43,7 @@ const pastors = ref([
 						class="!absolute inset-0 w-full h-full object-cover z-0"
 					>
 						<source
-							src="../src/assets/videos/bg.mp4"
+							src="../src/assets/videos/bg.mov"
 							type="video/mp4"
 						/>
 						Your browser does not support the video tag.

@@ -11,7 +11,7 @@ import ContainerWrapper from "./container-wrapper.vue";
 						src="../assets/images/logo.png"
 						alt="kingsville church logo"
 						class="h-15"
-					/>
+					>
 
 					<div class="flex gap-5">
 						<a
@@ -74,6 +74,9 @@ import ContainerWrapper from "./container-wrapper.vue";
 							<NuxtLink to="/events" class="link"
 								>Events</NuxtLink
 							>
+							<NuxtLink to="/ministries" class="link"
+								>Ministries</NuxtLink
+							>
 							<NuxtLink to="/media-center" class="link"
 								>Media Center</NuxtLink
 							>
@@ -92,19 +95,19 @@ import ContainerWrapper from "./container-wrapper.vue";
 					<div class="w-1/4 flex flex-col gap-5 items-start">
 						<p class="text-dark-grey">Ministries</p>
 						<div class="flex flex-col gap-3 items-start">
-							<NuxtLink to="#" class="link">Choir</NuxtLink>
-							<NuxtLink to="#" class="link">Technical</NuxtLink>
-							<NuxtLink to="#" class="link"
+							<NuxtLink to="/ministries" class="link">Choir</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Technical</NuxtLink>
+							<NuxtLink to="/ministries" class="link"
 								>Royal Scribe</NuxtLink
 							>
-							<NuxtLink to="#" class="link">Protocol</NuxtLink>
-							<NuxtLink to="#" class="link">Greeters</NuxtLink>
-							<NuxtLink to="#" class="link">Church 252</NuxtLink>
-							<NuxtLink to="#" class="link">Benevolence</NuxtLink>
-							<NuxtLink to="#" class="link">Marshal</NuxtLink>
-							<NuxtLink to="#" class="link">Ushering</NuxtLink>
-							<NuxtLink to="#" class="link">Finance</NuxtLink>
-							<NuxtLink to="#" class="link">Maintenance</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Protocol</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Greeters</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Church 252</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Benevolence</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Marshal</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Ushering</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Finance</NuxtLink>
+							<NuxtLink to="/ministries" class="link">Maintenance</NuxtLink>
 						</div>
 					</div>
 					<div class="w-1/4 flex flex-col gap-5 items-start">
