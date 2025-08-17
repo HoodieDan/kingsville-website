@@ -101,9 +101,9 @@ const pastors = ref([
 				Our roots are in Yaba and Okota though we are reaching the
 				world. Join us to enjoy the word at any of our branches.
 			</p>
-			<div class="flex gap-30 md:gap-10 mt-5 flex-col md:flex-row">
+			<div class="flex gap-12 md:gap-10 mt-5 flex-col md:flex-row">
 				<div class="md:flex-1">
-					<div class="h-screen w-full flex flex-col gap-3">
+					<div class="h-[30rem] md:h-screen w-full flex flex-col gap-3">
 						<img
 							src="../public/images/kvc-alagomeji.jpeg"
 							alt="kingsville church Yaba"
@@ -121,7 +121,7 @@ const pastors = ref([
 					</div>
 				</div>
 				<div class="md:flex-1">
-					<div class="h-screen w-full flex flex-col gap-3">
+					<div class="h-[30rem] md:h-screen w-full flex flex-col gap-3">
 						<img
 							src="../public/images/kvc-okota.jpg"
 							alt="kingsville church alagomeji"
