@@ -168,7 +168,7 @@ useScrollAnimations();
 				</div>
 				<div class="w-full md:w-1/3 h-72 bg-placeholder rounded-md">
 					<img
-						src="../public/images/our-vision.jpg"
+						src="../public/images/our-vision.JPG"
 						alt="ife on her knees worshipping"
 						class="w-full h-full object-cover rounded-md t__clip__animate"
 					/>
