@@ -185,7 +185,7 @@ const viewOtherEvents = () => {
           <div class="flex-1 relative">
             <div class="bg-placeholder w-full h-full rounded-lg">
               <img
-                src="../public/images/join-us.jpg"
+                src="../public/images/join-us.JPG"
                 alt="join us"
                 class="w-full h-full object-cover rounded-lg t__clip__animate"
               />
