@@ -82,7 +82,7 @@ useScrollAnimations();
 					class="w-full md:w-7/12 h-[35rem] bg-placeholder rounded-md"
 				>
 					<img
-						src="../public/images/who-we-are.jpg"
+						src="../public/images/who-we-are.JPG"
 						alt="people worshipping"
 						class="w-full h-full object-cover rounded-md t__clip__animate"
 					/>
