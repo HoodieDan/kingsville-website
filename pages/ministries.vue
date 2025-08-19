@@ -8,7 +8,7 @@
           ministries that serve our community and find ways to be a part of what
           God is doing.
         </p>
-        <img src="../public/images/ministries.jpg" alt="ministries" class="w-full md:w-1/2 h-auto rounded-lg">
+        <img src="../public/images/ministries.JPG" alt="ministries" class="w-full md:w-1/2 h-auto rounded-lg">
       </div>
 
       <!-- Ministries Grid -->

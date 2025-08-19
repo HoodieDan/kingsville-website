@@ -152,7 +152,7 @@ const viewOtherEvents = () => {
         <div class="md:flex-1">
           <div class="h-[30rem] md:h-[40rem] w-full flex flex-col gap-3">
             <img
-              src="../public/images/kvc-okota.jpeg"
+              src="../public/images/kvc-okota.JPEG"
               alt="kingsville church alagomeji"
               class="w-full h-full object-cover rounded-md t__clip__animate"
             />
