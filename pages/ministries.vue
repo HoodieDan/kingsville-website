@@ -1,14 +1,20 @@
 <template>
   <div>
     <ContainerWrapper>
-      <div class="text-center mb-12 flex flex-col gap-2 justify-center items-center mt-10">
+      <div
+        class="text-center mb-12 flex flex-col gap-2 justify-center items-center mt-10"
+      >
         <h1 class="t__reveal__animate">Our Ministries</h1>
         <p class="mt-2 max-w-2xl mx-auto t__fade__animate">
           Welcome to the ministries page of our church. Explore the various
           ministries that serve our community and find ways to be a part of what
           God is doing.
         </p>
-        <img src="../public/images/ministries.JPG" alt="ministries" class="w-full md:w-1/2 h-auto rounded-lg">
+        <img
+          src="../public/images/ministries.JPG"
+          alt="ministries"
+          class="w-full md:w-1/2 h-auto rounded-lg"
+        />
       </div>
 
       <!-- Ministries Grid -->
@@ -24,14 +30,25 @@
           </p>
         </div>
 
-        <!-- FCT -->
+        <!-- Technical -->
         <div
           class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition"
         >
-          <h5 class="mb-2 !font-bold t__reveal__animate">FCT</h5>
+          <h5 class="mb-2 !font-bold t__reveal__animate">Technical</h5>
           <p class="t__fade__animate">
             Supporting services with sound, lighting, and media to ensure a
             smooth and engaging worship experience.
+          </p>
+        </div>
+
+        <!-- Audio Visual -->
+        <div
+          class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition"
+        >
+          <h5 class="mb-2 !font-bold t__reveal__animate">Audio Visual</h5>
+          <p class="t__fade__animate">
+            Enhancing worship through video, projections, and creative visuals
+            that communicate the gospel effectively.
           </p>
         </div>
 
@@ -41,8 +58,9 @@
         >
           <h5 class="mb-2 !font-bold t__reveal__animate">Royal Scribe</h5>
           <p class="t__fade__animate">
-            Documenting church activities, events, and testimonies, preserving
-            the story of God’s faithfulness in our community.
+            Managing and distributing church messages as their primary work,
+            while also documenting activities, events, and testimonies to
+            preserve the story of God’s faithfulness.
           </p>
         </div>
 
@@ -131,6 +149,19 @@
           <p class="t__fade__animate">
             Caring for the church facilities and grounds, keeping them clean,
             functional, and welcoming for all.
+          </p>
+        </div>
+
+        <!-- FCT -->
+        <div
+          class="bg-white shadow-md rounded-2xl p-6 hover:shadow-xl transition"
+        >
+          <h5 class="mb-2 !font-bold t__reveal__animate">
+            FCT (Follow-up & Counselling Team)
+          </h5>
+          <p class="t__fade__animate">
+            Reaching out to new members and providing spiritual counselling,
+            discipleship, and support for those in need of guidance and care.
           </p>
         </div>
       </div>
