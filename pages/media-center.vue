@@ -117,47 +117,106 @@
                 <div class="flex font-semibold border-b pb-2 mb-2">
                   <div class="w-1/4">Date</div>
                   <div class="flex-1">Title</div>
-                  <div class="w-auto text-center">Download</div>
+                  <div class="w-auto text-center">Actions</div>
                 </div>
                 <div
                   v-for="audio in filteredItems"
                   :key="audio.id"
-                  class="flex items-center py-3 border-b"
+                  class="flex flex-col py-3 border-b"
                 >
-                  <div class="w-1/4 text-gray-600">
-                    {{ formatDate(audio.primary.date) }}
-                  </div>
-                  <div class="flex-1">
-                    <h6>
-                      {{ audio.primary.message_title }}
-                    </h6>
-                    <p class="text-gray-600">
-                      {{ audio.primary.minister }}
-                    </p>
-                  </div>
-                  <div class="w-7 flex justify-center">
-                    <a
-                      :href="audio.primary.message_audio_link?.url"
-                      target="_blank"
-                      rel="noopener"
-                      class="text-blue-600 hover:text-blue-800 cursor-pointer"
-                      title="Download"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                  <div class="flex items-center">
+                    <div class="w-1/4 text-gray-600">
+                      {{ formatDate(audio.primary.date) }}
+                    </div>
+                    <div class="flex-1">
+                      <h6>
+                        {{ audio.primary.message_title }}
+                      </h6>
+                      <p class="text-gray-600">
+                        {{ audio.primary.minister }}
+                      </p>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                      <button
+                        v-if="audio.primary.message_audio_link?.url"
+                        class="ghost !px-0"
+                        :title="
+                          activePlayer === audio.id ? 'Hide Player' : 'Play'
+                        "
+                        @click="togglePlayer(audio.id)"
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-                        />
-                      </svg>
-                    </a>
+                        <svg
+                          v-if="activePlayer !== audio.id"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                          />
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <svg
+                          v-else
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </button>
+                      <a
+                        :href="audio.primary.message_audio_link?.url"
+                        target="_blank"
+                        rel="noopener"
+                        class="text-blue-600 hover:text-blue-800 cursor-pointer"
+                        title="Download"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- Audio Player -->
+                  <div v-if="activePlayer === audio.id" class="mt-3 w-full">
+                    <audio
+                      :src="audio.primary.message_audio_link.url"
+                      controls
+                      autoplay
+                      preload="metadata"
+                      class="w-full"
+                    >
+                      Your browser does not support the audio element.
+                    </audio>
                   </div>
                 </div>
               </div>
@@ -191,10 +250,22 @@ const tab = ref("audio");
 
 const switchTab = (newTab) => {
   tab.value = newTab;
+  activePlayer.value = null; // Close any open player when switching tabs
 };
 
 // Search state
 const searchQuery = ref("");
+
+// Active player state
+const activePlayer = ref(null);
+
+const togglePlayer = (audioId) => {
+  if (activePlayer.value === audioId) {
+    activePlayer.value = null; // Close if already open
+  } else {
+    activePlayer.value = audioId; // Open this player and close others
+  }
+};
 
 // Helper function to check if a message is a lifeway session
 const isLifewaySession = (item) => {

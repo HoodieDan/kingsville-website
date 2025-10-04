@@ -34,6 +34,69 @@ const nextEvent = computed(() => {
   return sorted.find((slice) => new Date(slice.primary.date_and_time) > now);
 });
 
+// Countdown timer
+const countdown = ref({
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+});
+
+const eventStatus = ref<'upcoming' | 'today' | 'started'>('upcoming');
+
+const updateCountdown = () => {
+  if (!nextEvent.value) return;
+
+  const now = new Date().getTime();
+  const eventTime = new Date(nextEvent.value.primary.date_and_time).getTime();
+  const distance = eventTime - now;
+
+  // Event has already started
+  if (distance < 0) {
+    eventStatus.value = 'started';
+    countdown.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdown.value = { days, hours, minutes, seconds };
+
+  // Determine if it's today
+  if (days === 0) {
+    eventStatus.value = 'today';
+  } else {
+    eventStatus.value = 'upcoming';
+  }
+};
+
+// Update countdown every second
+let countdownInterval: NodeJS.Timeout | null = null;
+
+watch(
+  nextEvent,
+  (newEvent) => {
+    if (countdownInterval) {
+      clearInterval(countdownInterval);
+    }
+
+    if (newEvent) {
+      updateCountdown();
+      countdownInterval = setInterval(updateCountdown, 1000);
+    }
+  },
+  { immediate: true }
+);
+
+onUnmounted(() => {
+  if (countdownInterval) {
+    clearInterval(countdownInterval);
+  }
+});
+
 watch(data, (newData) => {
   if (newData) {
     console.log(newData.data.slices);
@@ -234,6 +297,140 @@ const viewOtherEvents = () => {
             >
               {{ new Date(nextEvent.primary.date_and_time).toLocaleString() }}
             </time>
+
+            <!-- Countdown Timer -->
+            <div class="mt-6 p-6 bg-primary-blue/5 rounded-lg">
+              <!-- Event has started -->
+              <div v-if="eventStatus === 'started'" class="text-center">
+                <div class="flex items-center justify-center gap-2 mb-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-green-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <p class="text-lg font-bold text-green-600">
+                    Event has started!
+                  </p>
+                </div>
+                <p class="text-sm text-gray-600">
+                  This event is currently in progress. Join us now!
+                </p>
+              </div>
+
+              <!-- Event is today -->
+              <div v-else-if="eventStatus === 'today'">
+                <div class="text-center mb-4">
+                  <p class="text-lg font-bold text-primary-orange mb-1">
+                    🎉 Today is the day!
+                  </p>
+                  <p class="text-sm text-gray-600">Event starts in:</p>
+                </div>
+                <div class="grid grid-cols-3 gap-2 md:gap-4">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="bg-primary-orange text-white rounded-lg p-3 md:p-4 w-full text-center"
+                    >
+                      <span class="text-2xl md:text-3xl font-bold">{{
+                        countdown.hours
+                      }}</span>
+                    </div>
+                    <span class="text-xs md:text-sm text-gray-600 mt-2"
+                      >Hours</span
+                    >
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="bg-primary-orange text-white rounded-lg p-3 md:p-4 w-full text-center"
+                    >
+                      <span class="text-2xl md:text-3xl font-bold">{{
+                        countdown.minutes
+                      }}</span>
+                    </div>
+                    <span class="text-xs md:text-sm text-gray-600 mt-2"
+                      >Minutes</span
+                    >
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="bg-primary-orange text-white rounded-lg p-3 md:p-4 w-full text-center"
+                    >
+                      <span class="text-2xl md:text-3xl font-bold">{{
+                        countdown.seconds
+                      }}</span>
+                    </div>
+                    <span class="text-xs md:text-sm text-gray-600 mt-2"
+                      >Seconds</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Upcoming event -->
+              <div v-else>
+                <p class="text-sm text-gray-600 mb-3 font-semibold text-center">
+                  Event starts in:
+                </p>
+                <div class="grid grid-cols-4 gap-2 md:gap-4">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="bg-primary-blue text-white rounded-lg p-3 md:p-4 w-full text-center"
+                    >
+                      <span class="text-2xl md:text-3xl font-bold">{{
+                        countdown.days
+                      }}</span>
+                    </div>
+                    <span class="text-xs md:text-sm text-gray-600 mt-2"
+                      >Days</span
+                    >
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="bg-primary-blue text-white rounded-lg p-3 md:p-4 w-full text-center"
+                    >
+                      <span class="text-2xl md:text-3xl font-bold">{{
+                        countdown.hours
+                      }}</span>
+                    </div>
+                    <span class="text-xs md:text-sm text-gray-600 mt-2"
+                      >Hours</span
+                    >
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="bg-primary-blue text-white rounded-lg p-3 md:p-4 w-full text-center"
+                    >
+                      <span class="text-2xl md:text-3xl font-bold">{{
+                        countdown.minutes
+                      }}</span>
+                    </div>
+                    <span class="text-xs md:text-sm text-gray-600 mt-2"
+                      >Minutes</span
+                    >
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="bg-primary-blue text-white rounded-lg p-3 md:p-4 w-full text-center"
+                    >
+                      <span class="text-2xl md:text-3xl font-bold">{{
+                        countdown.seconds
+                      }}</span>
+                    </div>
+                    <span class="text-xs md:text-sm text-gray-600 mt-2"
+                      >Seconds</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <button class="mt-4 px-6 py-2 !w-auto" @click="viewOtherEvents">
               View other events
