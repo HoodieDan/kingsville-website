@@ -114,17 +114,30 @@
 
             <div v-else>
               <div class="flex flex-col">
-                <div class="flex font-semibold border-b pb-2 mb-2">
+                <!-- Desktop Header -->
+                <div class="hidden md:flex font-semibold border-b pb-2 mb-2 gap-4">
+                  <div class="w-20 flex-shrink-0"></div> <!-- Thumbnail column -->
                   <div class="w-1/4">Date</div>
                   <div class="flex-1">Title</div>
                   <div class="w-auto text-center">Actions</div>
                 </div>
+
                 <div
                   v-for="audio in filteredItems"
                   :key="audio.id"
                   class="flex flex-col py-3 border-b"
                 >
-                  <div class="flex items-center">
+                  <!-- Desktop Layout -->
+                  <div class="hidden md:flex items-center gap-4">
+                    <!-- Thumbnail -->
+                    <div v-if="audio.primary.thumbnail?.url" class="w-20 h-20 flex-shrink-0">
+                      <img
+                        :src="audio.primary.thumbnail.url"
+                        :alt="audio.primary.message_title"
+                        class="w-full h-full object-cover rounded-md"
+                      >
+                    </div>
+
                     <div class="w-1/4 text-gray-600">
                       {{ formatDate(audio.primary.date) }}
                     </div>
@@ -136,10 +149,10 @@
                         {{ audio.primary.minister }}
                       </p>
                     </div>
-                    <div class="flex gap-2 items-center">
+                    <div class="flex gap-3 items-center">
                       <button
                         v-if="audio.primary.message_audio_link?.url"
-                        class="ghost !px-0"
+                        class="ghost !px-2 !py-2"
                         :title="
                           activePlayer === audio.id ? 'Hide Player' : 'Play'
                         "
@@ -186,7 +199,7 @@
                         :href="audio.primary.message_audio_link?.url"
                         target="_blank"
                         rel="noopener"
-                        class="text-blue-600 hover:text-blue-800 cursor-pointer"
+                        class="text-blue-600 hover:text-blue-800 cursor-pointer p-2"
                         title="Download"
                       >
                         <svg
@@ -206,6 +219,104 @@
                       </a>
                     </div>
                   </div>
+
+                  <!-- Mobile Layout -->
+                  <div class="md:hidden flex flex-col gap-3">
+                    <div class="flex gap-3 items-start">
+                      <!-- Thumbnail -->
+                      <div v-if="audio.primary.thumbnail?.url" class="w-16 h-16 flex-shrink-0">
+                        <img
+                          :src="audio.primary.thumbnail.url"
+                          :alt="audio.primary.message_title"
+                          class="w-full h-full object-cover rounded-md"
+                        >
+                      </div>
+
+                      <div class="flex-1">
+                        <p class="text-xs text-gray-500 mb-1">
+                          {{ formatDateMobile(audio.primary.date) }}
+                        </p>
+                        <h6 class="text-sm">
+                          {{ audio.primary.message_title }}
+                        </h6>
+                        <p class="text-xs text-gray-600 mt-1">
+                          {{ audio.primary.minister }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="flex gap-3">
+                      <button
+                        v-if="audio.primary.message_audio_link?.url"
+                        class="flex-1 ghost !px-4 !py-3 flex items-center justify-center gap-2"
+                        :title="
+                          activePlayer === audio.id ? 'Hide Player' : 'Play'
+                        "
+                        @click="togglePlayer(audio.id)"
+                      >
+                        <svg
+                          v-if="activePlayer !== audio.id"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                          />
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <svg
+                          v-else
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span class="text-sm">{{ activePlayer === audio.id ? 'Hide' : 'Play' }}</span>
+                      </button>
+                      <a
+                        :href="audio.primary.message_audio_link?.url"
+                        target="_blank"
+                        rel="noopener"
+                        class="flex-1 text-blue-600 hover:text-blue-800 border border-blue-600 rounded-lg px-4 py-3 flex items-center justify-center gap-2"
+                        title="Download"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
+                          />
+                        </svg>
+                        <span class="text-sm">Download</span>
+                      </a>
+                    </div>
+                  </div>
+
                   <!-- Audio Player -->
                   <div v-if="activePlayer === audio.id" class="mt-3 w-full">
                     <audio
@@ -313,10 +424,16 @@ const filteredItems = computed(() => {
   }
 });
 
-// Date formatting
+// Date formatting for desktop
 function formatDate(dateStr) {
   const date = new Date(dateStr);
   return format(date, "EEEE, MMMM d, yyyy"); // e.g., Sunday, June 25, 2025
+}
+
+// Date formatting for mobile (compact)
+function formatDateMobile(dateStr) {
+  const date = new Date(dateStr);
+  return format(date, "MMM d, yyyy"); // e.g., Jun 25, 2025
 }
 
 function getResponsiveEmbed(rawHtml) {
