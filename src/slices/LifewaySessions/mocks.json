@@ -29,9 +29,15 @@
 				"type": "Text"
 			},
 			"embed_link": {
-				"__TYPE__": "FieldContent",
-				"value": "yet",
-				"type": "Text"
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Dolore occaecat in nisi labore eiusmod pariatur velit sit et quis do duis do pariatur consectetur. Officia dolor laborum duis tempor incididunt enim sit ipsum."
+						}
+					}
+				]
 			}
 		},
 		"items": []

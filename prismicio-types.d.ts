@@ -575,12 +575,12 @@ export interface LifewaySessionsSliceDefaultPrimary {
   /**
    * embed link field in *LifewaySessions → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: lifeway_sessions.default.primary.embed_link
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  embed_link: prismic.KeyTextField;
+  embed_link: prismic.RichTextField;
 
   /**
    * minister field in *LifewaySessions → Default → Primary*

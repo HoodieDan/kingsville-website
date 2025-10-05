@@ -72,7 +72,7 @@
         </div>
 
         <div>
-          <p v-if="pending || audioPending">Loading...</p>
+          <p v-if="pending || audioPending || lifewayPending">Loading...</p>
 
           <div v-else>
             <div
@@ -86,6 +86,7 @@
               >
                 <!-- Embed video -->
                 <div
+                  v-if="item.primary.embed_link && item.primary.embed_link[0]?.text"
                   class="aspect-video w-full"
                   v-html="getResponsiveEmbed(item.primary.embed_link[0].text)"
                 ></div>
@@ -357,6 +358,11 @@ const { data: audioMessages, isPending: audioPending } = useQuery({
   queryFn: () => prismic.client.getSingle("audio_messages"),
 });
 
+const { data: lifewaySessions, isPending: lifewayPending } = useQuery({
+  queryKey: ["lifeway_sessions"],
+  queryFn: () => prismic.client.getSingle("lifeway_sessions"),
+});
+
 const tab = ref("audio");
 
 const switchTab = (newTab) => {
@@ -378,15 +384,11 @@ const togglePlayer = (audioId) => {
   }
 };
 
-// Helper function to check if a message is a lifeway session
-const isLifewaySession = (item) => {
-  return item.primary.message_title?.toLowerCase().includes("lifeway session");
-};
-
 // Filter logic
 const filteredItems = computed(() => {
   const query = searchQuery.value.toLowerCase().trim();
   const videoItems = data.value?.data?.slices ?? [];
+  const lifewayItems = lifewaySessions.value?.data?.slices ?? [];
 
   const getSortedFiltered = (items) => {
     const filtered = !query
@@ -411,13 +413,11 @@ const filteredItems = computed(() => {
   };
 
   if (tab.value === "video") {
-    // Show only video messages that are NOT lifeway sessions
-    const regularVideos = videoItems.filter((item) => !isLifewaySession(item));
-    return getSortedFiltered(regularVideos);
+    // Show video messages
+    return getSortedFiltered(videoItems);
   } else if (tab.value === "lifeway") {
-    // Show only lifeway sessions from video messages
-    const lifewaySessions = videoItems.filter((item) => isLifewaySession(item));
-    return getSortedFiltered(lifewaySessions);
+    // Show lifeway sessions from dedicated single
+    return getSortedFiltered(lifewayItems);
   } else {
     // Audio tab - show all audio messages
     return getSortedFiltered(audioMessages.value?.data?.slices ?? []);
