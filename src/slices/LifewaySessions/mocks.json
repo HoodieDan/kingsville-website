@@ -1,0 +1,39 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"date": {
+				"__TYPE__": "FieldContent",
+				"type": "Date",
+				"value": "2014-09-18"
+			},
+			"message_title": {
+				"__TYPE__": "FieldContent",
+				"value": "fur",
+				"type": "Text"
+			},
+			"minister": {
+				"__TYPE__": "FieldContent",
+				"value": "declared",
+				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "FieldContent",
+				"value": "afternoon",
+				"type": "Text"
+			},
+			"scriptures": {
+				"__TYPE__": "FieldContent",
+				"value": "numeral",
+				"type": "Text"
+			},
+			"embed_link": {
+				"__TYPE__": "FieldContent",
+				"value": "yet",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

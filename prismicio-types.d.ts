@@ -213,6 +213,71 @@ interface FootDocumentData {}
 export type FootDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<FootDocumentData>, "foot", Lang>;
 
+type LifewaySessionsDocumentDataSlicesSlice = LifewaySessionsSlice;
+
+/**
+ * Content for lifeway sessions documents
+ */
+interface LifewaySessionsDocumentData {
+  /**
+   * Slice Zone field in *lifeway sessions*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lifeway_sessions.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<LifewaySessionsDocumentDataSlicesSlice> /**
+   * Meta Title field in *lifeway sessions*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: lifeway_sessions.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *lifeway sessions*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: lifeway_sessions.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *lifeway sessions*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lifeway_sessions.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * lifeway sessions document from Prismic
+ *
+ * - **API ID**: `lifeway_sessions`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LifewaySessionsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<LifewaySessionsDocumentData>,
+    "lifeway_sessions",
+    Lang
+  >;
+
 type MediaCenterDocumentDataSlicesSlice = MessageSlice;
 
 /**
@@ -282,6 +347,7 @@ export type AllDocumentTypes =
   | AudioMessagesDocument
   | EventsDocument
   | FootDocument
+  | LifewaySessionsDocument
   | MediaCenterDocument;
 
 /**
@@ -333,6 +399,16 @@ export interface AudioMessageSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   minister: prismic.KeyTextField;
+
+  /**
+   * thumbnail field in *AudioMessage → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_message.default.primary.thumbnail
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  thumbnail: prismic.ImageField<never>;
 }
 
 /**
@@ -395,16 +471,6 @@ export interface EventSliceDefaultPrimary {
   image: prismic.ImageField<never>;
 
   /**
-   * date field in *Event → Default → Primary*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: *None*
-   * - **API ID Path**: event.default.primary.date
-   * - **Documentation**: https://prismic.io/docs/fields/date
-   */
-  date: prismic.DateField;
-
-  /**
    * event name field in *Event → Default → Primary*
    *
    * - **Field Type**: Text
@@ -435,14 +501,24 @@ export interface EventSliceDefaultPrimary {
   tags: prismic.GroupField<Simplify<EventSliceDefaultPrimaryTagsItem>>;
 
   /**
-   * date and time field in *Event → Default → Primary*
+   * start date and time field in *Event → Default → Primary*
    *
    * - **Field Type**: Timestamp
    * - **Placeholder**: *None*
-   * - **API ID Path**: event.default.primary.date_and_time
+   * - **API ID Path**: event.default.primary.start_date_and_time
    * - **Documentation**: https://prismic.io/docs/fields/timestamp
    */
-  date_and_time: prismic.TimestampField;
+  start_date_and_time: prismic.TimestampField;
+
+  /**
+   * end date and time field in *Event → Default → Primary*
+   *
+   * - **Field Type**: Timestamp
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.default.primary.end_date_and_time
+   * - **Documentation**: https://prismic.io/docs/fields/timestamp
+   */
+  end_date_and_time: prismic.TimestampField;
 }
 
 /**
@@ -471,6 +547,101 @@ type EventSliceVariation = EventSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type EventSlice = prismic.SharedSlice<"event", EventSliceVariation>;
+
+/**
+ * Primary content in *LifewaySessions → Default → Primary*
+ */
+export interface LifewaySessionsSliceDefaultPrimary {
+  /**
+   * date field in *LifewaySessions → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lifeway_sessions.default.primary.date
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * message title field in *LifewaySessions → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lifeway_sessions.default.primary.message_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  message_title: prismic.KeyTextField;
+
+  /**
+   * embed link field in *LifewaySessions → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lifeway_sessions.default.primary.embed_link
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  embed_link: prismic.KeyTextField;
+
+  /**
+   * minister field in *LifewaySessions → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lifeway_sessions.default.primary.minister
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  minister: prismic.KeyTextField;
+
+  /**
+   * description field in *LifewaySessions → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lifeway_sessions.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * scriptures field in *LifewaySessions → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lifeway_sessions.default.primary.scriptures
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  scriptures: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for LifewaySessions Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LifewaySessionsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LifewaySessionsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *LifewaySessions*
+ */
+type LifewaySessionsSliceVariation = LifewaySessionsSliceDefault;
+
+/**
+ * LifewaySessions Shared Slice
+ *
+ * - **API ID**: `lifeway_sessions`
+ * - **Description**: LifewaySessions
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LifewaySessionsSlice = prismic.SharedSlice<
+  "lifeway_sessions",
+  LifewaySessionsSliceVariation
+>;
 
 /**
  * Primary content in *Message → Default → Primary*
@@ -596,6 +767,9 @@ declare module "@prismicio/client" {
       EventsDocumentDataSlicesSlice,
       FootDocument,
       FootDocumentData,
+      LifewaySessionsDocument,
+      LifewaySessionsDocumentData,
+      LifewaySessionsDocumentDataSlicesSlice,
       MediaCenterDocument,
       MediaCenterDocumentData,
       MediaCenterDocumentDataSlicesSlice,
@@ -609,6 +783,10 @@ declare module "@prismicio/client" {
       EventSliceDefaultPrimary,
       EventSliceVariation,
       EventSliceDefault,
+      LifewaySessionsSlice,
+      LifewaySessionsSliceDefaultPrimary,
+      LifewaySessionsSliceVariation,
+      LifewaySessionsSliceDefault,
       MessageSlice,
       MessageSliceDefaultPrimary,
       MessageSliceVariation,

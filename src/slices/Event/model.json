@@ -20,13 +20,6 @@
             "thumbnails": []
           }
         },
-        "date": {
-          "type": "Date",
-          "config": {
-            "label": "date",
-            "placeholder": ""
-          }
-        },
         "event_name": {
           "type": "Text",
           "config": {
@@ -57,10 +50,17 @@
             }
           }
         },
-        "date_and_time": {
+        "start_date_and_time": {
           "type": "Timestamp",
           "config": {
-            "label": "date and time",
+            "label": "start date and time",
+            "placeholder": ""
+          }
+        },
+        "end_date_and_time": {
+          "type": "Timestamp",
+          "config": {
+            "label": "end date and time",
             "placeholder": ""
           }
         }

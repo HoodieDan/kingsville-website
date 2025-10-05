@@ -26,6 +26,28 @@
 				"__TYPE__": "FieldContent",
 				"value": "touch",
 				"type": "Text"
+			},
+			"thumbnail": {
+				"__TYPE__": "ImageContent",
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1544731612-de7f96afe55f",
+					"width": 6000,
+					"height": 4000
+				},
+				"url": "https://images.unsplash.com/photo-1544731612-de7f96afe55f",
+				"width": 6000,
+				"height": 4000,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "many",
+				"thumbnails": {}
 			}
 		},
 		"items": []

@@ -13,7 +13,10 @@ const prismic = usePrismic();
 
 const { data } = useQuery({
   queryKey: ["events"],
-  queryFn: () => prismic.client.getSingle("events"),
+  queryFn: async () => {
+    const response = await prismic.client.getSingle("events");
+    return response;
+  },
 });
 
 // Compute the next event
@@ -22,16 +25,26 @@ const nextEvent = computed(() => {
 
   const now = new Date();
 
-  // Sort slices by their date_and_time
+  // First, check for camp meeting that hasn't ended yet
+  const campMeeting = data.value.data.slices.find((slice: { primary: { event_name: string; end_date_and_time: string | Date; start_date_and_time: string | Date; }; }) => {
+    const isCampMeeting = slice.primary.event_name?.toLowerCase().includes('camp meeting');
+    const endTime = new Date(slice.primary.end_date_and_time || slice.primary.start_date_and_time);
+    return isCampMeeting && endTime > now;
+  });
+
+  if (campMeeting) {
+    return campMeeting;
+  }
+
+  // Otherwise, find the next upcoming event by start time
   const sorted = [...data.value.data.slices].sort((a, b) => {
     return (
-      new Date(a.primary.date_and_time).getTime() -
-      new Date(b.primary.date_and_time).getTime()
+      new Date(a.primary.start_date_and_time).getTime() -
+      new Date(b.primary.start_date_and_time).getTime()
     );
   });
 
-  // Return the first upcoming one
-  return sorted.find((slice) => new Date(slice.primary.date_and_time) > now);
+  return sorted.find((slice) => new Date(slice.primary.start_date_and_time) > now);
 });
 
 // Countdown timer
@@ -48,7 +61,7 @@ const updateCountdown = () => {
   if (!nextEvent.value) return;
 
   const now = new Date().getTime();
-  const eventTime = new Date(nextEvent.value.primary.date_and_time).getTime();
+  const eventTime = new Date(nextEvent.value.primary.start_date_and_time).getTime();
   const distance = eventTime - now;
 
   // Event has already started
@@ -291,12 +304,21 @@ const viewOtherEvents = () => {
               </span>
             </div>
 
-            <time
-              class="text-gray-500 font-medium t__fade__animate"
-              :datetime="nextEvent.primary.date_and_time"
-            >
-              {{ new Date(nextEvent.primary.date_and_time).toLocaleString() }}
-            </time>
+            <div class="flex flex-col gap-1">
+              <time
+                class="text-gray-500 font-medium t__fade__animate"
+                :datetime="nextEvent.primary.start_date_and_time"
+              >
+                <span class="font-semibold">Starts:</span> {{ new Date(nextEvent.primary.start_date_and_time).toLocaleString() }}
+              </time>
+              <time
+                v-if="nextEvent.primary.end_date_and_time"
+                class="text-gray-500 font-medium t__fade__animate"
+                :datetime="nextEvent.primary.end_date_and_time"
+              >
+                <span class="font-semibold">Ends:</span> {{ new Date(nextEvent.primary.end_date_and_time).toLocaleString() }}
+              </time>
+            </div>
 
             <!-- Countdown Timer -->
             <div class="mt-6 p-6 bg-primary-blue/5 rounded-lg">

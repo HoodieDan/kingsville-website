@@ -1,8 +1,8 @@
 {
-  "id": "audio_message",
+  "id": "lifeway_sessions",
   "type": "SharedSlice",
-  "name": "AudioMessage",
-  "description": "AudioMessage",
+  "name": "LifewaySessions",
+  "description": "LifewaySessions",
   "variations": [
     {
       "id": "default",
@@ -12,13 +12,6 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "message_title": {
-          "type": "Text",
-          "config": {
-            "label": "message title",
-            "placeholder": ""
-          }
-        },
         "date": {
           "type": "Date",
           "config": {
@@ -26,15 +19,18 @@
             "placeholder": ""
           }
         },
-        "message_audio_link": {
-          "type": "Link",
+        "message_title": {
+          "type": "Text",
           "config": {
-            "label": "message audio link",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": false
+            "label": "message title",
+            "placeholder": ""
+          }
+        },
+        "embed_link": {
+          "type": "Text",
+          "config": {
+            "label": "embed link",
+            "placeholder": ""
           }
         },
         "minister": {
@@ -44,12 +40,18 @@
             "placeholder": ""
           }
         },
-        "thumbnail": {
-          "type": "Image",
+        "description": {
+          "type": "Text",
           "config": {
-            "label": "thumbnail",
-            "constraint": {},
-            "thumbnails": []
+            "label": "description",
+            "placeholder": ""
+          }
+        },
+        "scriptures": {
+          "type": "Text",
+          "config": {
+            "label": "scriptures",
+            "placeholder": ""
           }
         }
       },

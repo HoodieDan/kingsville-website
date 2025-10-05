@@ -64,14 +64,14 @@
 									<h4 class="text-white">
 										{{
 											formatDay(
-												event.primary.date_and_time
+												event.primary.start_date_and_time
 											)
 										}}
 									</h4>
 									<p class="text-sm text-white">
 										{{
 											formatMonth(
-												event.primary.date_and_time
+												event.primary.start_date_and_time
 											)
 										}}
 									</p>
@@ -82,12 +82,37 @@
 								<h5 class="mb-2">
 									{{ event.primary.event_name }}
 								</h5>
-								<p>
-									{{
-										formatTime(event.primary.date_and_time)
-									}}
-								</p>
-								<p>{{ event.primary.short_description }}</p>
+								<div class="flex flex-col gap-1 mb-2">
+									<p class="text-sm">
+										<span class="font-semibold">Starts:</span>
+										{{ formatDateTime(event.primary.start_date_and_time) }}
+									</p>
+									<p v-if="event.primary.end_date_and_time" class="text-sm">
+										<span class="font-semibold">Ends:</span>
+										{{ formatDateTime(event.primary.end_date_and_time) }}
+									</p>
+								</div>
+								<p class="mb-3">{{ event.primary.short_description }}</p>
+								<button
+									class="!w-auto text-sm"
+									@click="addToGoogleCalendar(event)"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="h-4 w-4 inline-block mr-1"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+										/>
+									</svg>
+									Remind Me
+								</button>
 							</div>
 						</div>
 					</div>
@@ -125,7 +150,8 @@ const filteredEvents = computed(() => {
 	const today = new Date();
 	return data.value.data.slices
 		.filter((event) => {
-			const eventDate = new Date(event.primary.date_and_time);
+			// Use end_date_and_time if available, otherwise use start_date_and_time
+			const eventDate = new Date(event.primary.end_date_and_time || event.primary.start_date_and_time);
 			return eventDate >= today;
 		})
 		.filter((event) => {
@@ -134,16 +160,18 @@ const filteredEvents = computed(() => {
 		});
 });
 
-// Format for time display
-const formatTime = (time) => {
+// Format date and time together
+const formatDateTime = (time) => {
 	const date = new Date(time);
-	const options = {
+	return date.toLocaleString("en-US", {
+		month: "short",
+		day: "numeric",
+		year: "numeric",
 		hour: "2-digit",
 		minute: "2-digit",
 		hour12: true,
 		timeZone: "Africa/Lagos",
-	};
-	return date.toLocaleTimeString("en-US", options);
+	});
 };
 
 // Format day as number (e.g. 28)
@@ -162,5 +190,54 @@ const formatMonth = (time) => {
 		month: "short",
 		timeZone: "Africa/Lagos",
 	});
+};
+
+// Add to Google Calendar with .ics download for better reminder support
+const addToGoogleCalendar = (event) => {
+	const startDate = new Date(event.primary.start_date_and_time);
+	const endDate = event.primary.end_date_and_time
+		? new Date(event.primary.end_date_and_time)
+		: new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // Default 2 hours if no end time
+
+	// Format dates for Google Calendar (YYYYMMDDTHHmmssZ)
+	const formatGoogleDate = (date) => {
+		return date.toISOString().replace(/-|:|\.\d+/g, '');
+	};
+
+	// Create ICS file content with proper reminders
+	const icsContent = [
+		'BEGIN:VCALENDAR',
+		'VERSION:2.0',
+		'PRODID:-//Kingsville Church//Events//EN',
+		'CALSCALE:GREGORIAN',
+		'METHOD:PUBLISH',
+		'BEGIN:VEVENT',
+		`DTSTART:${formatGoogleDate(startDate)}`,
+		`DTEND:${formatGoogleDate(endDate)}`,
+		`SUMMARY:${event.primary.event_name}`,
+		`DESCRIPTION:${event.primary.short_description || ''}`,
+		`LOCATION:Kingsville Church`,
+		'BEGIN:VALARM',
+		'TRIGGER:-P7D', // 7 days before
+		'ACTION:DISPLAY',
+		`DESCRIPTION:Reminder: ${event.primary.event_name} in 1 week`,
+		'END:VALARM',
+		'BEGIN:VALARM',
+		'TRIGGER:-P2D', // 2 days before
+		'ACTION:DISPLAY',
+		`DESCRIPTION:Reminder: ${event.primary.event_name} in 2 days`,
+		'END:VALARM',
+		'END:VEVENT',
+		'END:VCALENDAR'
+	].join('\r\n');
+
+	// Create blob and download
+	const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+	const link = document.createElement('a');
+	link.href = window.URL.createObjectURL(blob);
+	link.download = `${event.primary.event_name.replace(/[^a-z0-9]/gi, '_')}.ics`;
+	document.body.appendChild(link);
+	link.click();
+	document.body.removeChild(link);
 };
 </script>

@@ -26,11 +26,6 @@
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			},
-			"date": {
-				"__TYPE__": "FieldContent",
-				"type": "Date",
-				"value": "2014-06-21"
-			},
 			"event_name": {
 				"__TYPE__": "FieldContent",
 				"value": "bear",
@@ -59,10 +54,15 @@
 				"value": "myself",
 				"type": "Text"
 			},
-			"date_and_time": {
+			"start_date_and_time": {
 				"__TYPE__": "FieldContent",
 				"type": "Timestamp",
-				"value": "2020-02-10T22:27:59Z"
+				"value": "2014-11-08T22:31:56Z"
+			},
+			"end_date_and_time": {
+				"__TYPE__": "FieldContent",
+				"type": "Timestamp",
+				"value": "2015-01-08T12:10:17Z"
 			}
 		},
 		"items": []
