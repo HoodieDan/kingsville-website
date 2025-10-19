@@ -3,29 +3,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"image": {
-				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
-					"width": 3212,
-					"height": 3880
-				},
-				"url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
-				"width": 3212,
-				"height": 3880,
-				"edit": {
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 0
-					},
-					"background": "transparent"
-				},
-				"alt": "lucky",
-				"credits": null,
-				"__TYPE__": "ImageContent",
-				"thumbnails": {}
-			},
 			"event_name": {
 				"__TYPE__": "FieldContent",
 				"value": "bear",
@@ -49,11 +26,6 @@
 					}
 				]
 			},
-			"short_description": {
-				"__TYPE__": "FieldContent",
-				"value": "myself",
-				"type": "Text"
-			},
 			"start_date_and_time": {
 				"__TYPE__": "FieldContent",
 				"type": "Timestamp",
@@ -63,6 +35,61 @@
 				"__TYPE__": "FieldContent",
 				"type": "Timestamp",
 				"value": "2015-01-08T12:10:17Z"
+			},
+			"registration_link": {
+				"key": "fad3b89c-694a-458f-81da-78ffb9b12511",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com",
+					"text": "gave"
+				}
+			},
+			"short_description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Sit ullamco veniam incididunt sunt."
+						}
+					}
+				]
+			},
+			"images": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"__TYPE__": "ImageContent",
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1547082299-de196ea013d6",
+										"width": 4272,
+										"height": 2848
+									},
+									"url": "https://images.unsplash.com/photo-1547082299-de196ea013d6",
+									"width": 4272,
+									"height": 2848,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "number",
+									"thumbnails": {}
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []

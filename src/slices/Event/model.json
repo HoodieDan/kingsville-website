@@ -12,14 +12,6 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "image": {
-          "type": "Image",
-          "config": {
-            "label": "image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
         "event_name": {
           "type": "Text",
           "config": {
@@ -28,10 +20,12 @@
           }
         },
         "short_description": {
-          "type": "Text",
+          "type": "StructuredText",
           "config": {
             "label": "short description",
-            "placeholder": ""
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
         "tags": {
@@ -62,6 +56,34 @@
           "config": {
             "label": "end date and time",
             "placeholder": ""
+          }
+        },
+        "registration_link": {
+          "type": "Link",
+          "config": {
+            "label": "registration_link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "images": {
+          "type": "Group",
+          "config": {
+            "label": "images",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
           }
         }
       },

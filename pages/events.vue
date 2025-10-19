@@ -13,12 +13,42 @@
 						</p>
 					</div>
 				</div>
-				<div class="flex-1 bg-grey rounded-lg overflow-hidden">
+
+				<!-- Loading state for hero image/carousel -->
+				<div v-if="pending" class="flex-1 bg-grey rounded-lg overflow-hidden h-[30rem] md:h-[35rem] flex items-center justify-center">
+					<div class="spinner"></div>
+				</div>
+
+				<!-- Default fallback image when no event images -->
+				<div v-else-if="!hasEventImages" class="flex-1 bg-grey rounded-lg overflow-hidden">
 					<img
 						src="../public/images/upcoming-events.jpeg"
 						alt="upcoming-events"
 						class="w-full h-full object-cover rounded-lg t__clip__animate"
 					/>
+				</div>
+
+				<!-- Event images carousel -->
+				<div v-else class="flex-1 bg-grey rounded-lg overflow-hidden h-[30rem] md:h-[35rem]">
+					<EventCarousel
+						:slides-per-view="1"
+						:space-between="0"
+						:loop="true"
+						:autoplay="{ delay: 5000 }"
+						class="w-full h-full"
+					>
+						<SwiperSlide
+							v-for="(image, index) in allEventImages"
+							:key="index"
+							class="w-full h-full"
+						>
+							<img
+								:src="image.url"
+								:alt="image.alt || 'Event image'"
+								class="w-full h-full object-cover"
+							/>
+						</SwiperSlide>
+					</EventCarousel>
 				</div>
 			</div>
 
@@ -35,7 +65,7 @@
 						/>
 					</div>
 
-					<p v-if="pending">Loading...</p>
+					<LoadingSpinner v-if="pending" />
 					<div
 						v-if="filteredEvents.length > 0 && !pending"
 						class="flex-1 space-y-8"
@@ -48,14 +78,14 @@
 							<div
 								class="bg-white rounded-2xl w-30 h-30 flex flex-col gap-2 items-center justify-center relative overflow-hidden"
 								:style="
-									event.primary.image
-										? `background-image: url('${event.primary.image.url}'); background-size: cover; background-position: center;`
+									getEventImage(event)
+										? `background-image: url('${getEventImage(event)}'); background-size: cover; background-position: center;`
 										: ''
 								"
 							>
 								<!-- Dark overlay -->
 								<div
-									v-if="event.primary.image"
+									v-if="getEventImage(event)"
 									class="!absolute inset-0 bg-black/70 z-0"
 								></div>
 								<div
@@ -92,27 +122,52 @@
 										{{ formatDateTime(event.primary.end_date_and_time) }}
 									</p>
 								</div>
-								<p class="mb-3">{{ event.primary.short_description }}</p>
-								<button
-									class="!w-auto text-sm"
-									@click="addToGoogleCalendar(event)"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="h-4 w-4 inline-block mr-1"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
+								<div class="mb-3">
+									<PrismicRichText :field="event.primary.short_description" />
+								</div>
+								<div class="flex flex-wrap gap-2 justify-center md:justify-start">
+									<button
+										class="!w-auto text-sm"
+										@click="addToGoogleCalendar(event)"
 									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-										/>
-									</svg>
-									Remind Me
-								</button>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="h-4 w-4 inline-block mr-1"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+											/>
+										</svg>
+										Remind Me
+									</button>
+									<button
+										v-if="event.primary.registration_link?.text"
+										class="!w-auto text-sm !bg-primary-orange !text-white hover:!bg-primary-orange/90"
+										@click="() => navigateTo(event.primary.registration_link.text, { external: true, open: { target: '_blank' } })"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="h-4 w-4 inline-block mr-1"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M5 13l4 4L19 7"
+											/>
+										</svg>
+										Reserve My Seat
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -129,6 +184,10 @@
 <script setup>
 import { ref, computed } from "vue";
 import ContainerWrapper from "~/src/components/container-wrapper.vue";
+import EventCarousel from "~/src/components/event-carousel.vue";
+import LoadingSpinner from "~/src/components/loading-spinner.vue";
+import { SwiperSlide } from "swiper/vue";
+import { PrismicRichText } from "@prismicio/vue";
 import { useScrollAnimations } from "~/src/composables/useScrollAnimation";
 import { useQuery } from "@tanstack/vue-query";
 
@@ -148,7 +207,7 @@ const filteredEvents = computed(() => {
 	if (!data.value?.data?.slices) return [];
 
 	const today = new Date();
-	return data.value.data.slices
+	const events = data.value.data.slices
 		.filter((event) => {
 			// Use end_date_and_time if available, otherwise use start_date_and_time
 			const eventDate = new Date(event.primary.end_date_and_time || event.primary.start_date_and_time);
@@ -158,7 +217,42 @@ const filteredEvents = computed(() => {
 			const name = event.primary.event_name?.toLowerCase() || "";
 			return name.includes(searchQuery.value.toLowerCase());
 		});
+
+	return events;
 });
+
+// Get all event images for carousel
+const allEventImages = computed(() => {
+	if (!filteredEvents.value || filteredEvents.value.length === 0) return [];
+
+	const images = [];
+	filteredEvents.value.forEach((event) => {
+		if (event.primary.images && event.primary.images.length > 0) {
+			event.primary.images.forEach((imgObj) => {
+				if (imgObj.image && imgObj.image.url) {
+					images.push({
+						url: imgObj.image.url,
+						alt: imgObj.image.alt
+					});
+				}
+			});
+		}
+	});
+	return images;
+});
+
+// Check if there are any event images
+const hasEventImages = computed(() => {
+	return allEventImages.value.length > 0;
+});
+
+// Get first image from event's images array
+const getEventImage = (event) => {
+	if (event.primary.images && event.primary.images.length > 0 && event.primary.images[0].image) {
+		return event.primary.images[0].image.url;
+	}
+	return null;
+};
 
 // Format date and time together
 const formatDateTime = (time) => {
@@ -218,6 +312,11 @@ const addToGoogleCalendar = (event) => {
 		`DESCRIPTION:${event.primary.short_description || ''}`,
 		`LOCATION:Kingsville Church`,
 		'BEGIN:VALARM',
+		'TRIGGER:-P15D', // 15 days before
+		'ACTION:DISPLAY',
+		`DESCRIPTION:Reminder: ${event.primary.event_name} in 15 days`,
+		'END:VALARM',
+		'BEGIN:VALARM',
 		'TRIGGER:-P7D', // 7 days before
 		'ACTION:DISPLAY',
 		`DESCRIPTION:Reminder: ${event.primary.event_name} in 1 week`,
@@ -241,3 +340,23 @@ const addToGoogleCalendar = (event) => {
 	document.body.removeChild(link);
 };
 </script>
+
+<style scoped>
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e3e3e3;
+  border-top: 4px solid #28166f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

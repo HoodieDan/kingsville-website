@@ -76,7 +76,7 @@ defineProps({
 	</div>
 </template>
 
-<style>
+<style scoped>
 .swiper-pagination-bullet {
 	background-color: transparent !important;
 	width: 10px;

@@ -343,12 +343,99 @@ export type MediaCenterDocument<Lang extends string = string> =
     Lang
   >;
 
+type StartYourDayDocumentDataSlicesSlice = AudioMessageSlice;
+
+/**
+ * Content for start your day documents
+ */
+interface StartYourDayDocumentData {
+  /**
+   * Slice Zone field in *start your day*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: start_your_day.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<StartYourDayDocumentDataSlicesSlice> /**
+   * Meta Title field in *start your day*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: start_your_day.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *start your day*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: start_your_day.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *start your day*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: start_your_day.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * start your day document from Prismic
+ *
+ * - **API ID**: `start_your_day`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type StartYourDayDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<StartYourDayDocumentData>,
+    "start_your_day",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | AudioMessagesDocument
   | EventsDocument
   | FootDocument
   | LifewaySessionsDocument
-  | MediaCenterDocument;
+  | MediaCenterDocument
+  | StartYourDayDocument;
+
+/**
+ * Item in *AudioMessage → Default → Primary → messages*
+ */
+export interface AudioMessageSliceDefaultPrimaryMessagesItem {
+  /**
+   * audio message link field in *AudioMessage → Default → Primary → messages*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_message.default.primary.messages[].audio_message_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  audio_message_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
 
 /**
  * Primary content in *AudioMessage → Default → Primary*
@@ -375,22 +462,6 @@ export interface AudioMessageSliceDefaultPrimary {
   date: prismic.DateField;
 
   /**
-   * message audio link field in *AudioMessage → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: audio_message.default.primary.message_audio_link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  message_audio_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
-
-  /**
    * minister field in *AudioMessage → Default → Primary*
    *
    * - **Field Type**: Text
@@ -409,6 +480,18 @@ export interface AudioMessageSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   thumbnail: prismic.ImageField<never>;
+
+  /**
+   * messages field in *AudioMessage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: audio_message.default.primary.messages[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  messages: prismic.GroupField<
+    Simplify<AudioMessageSliceDefaultPrimaryMessagesItem>
+  >;
 }
 
 /**
@@ -457,19 +540,24 @@ export interface EventSliceDefaultPrimaryTagsItem {
 }
 
 /**
- * Primary content in *Event → Default → Primary*
+ * Item in *Event → Default → Primary → images*
  */
-export interface EventSliceDefaultPrimary {
+export interface EventSliceDefaultPrimaryImagesItem {
   /**
-   * image field in *Event → Default → Primary*
+   * image field in *Event → Default → Primary → images*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: event.default.primary.image
+   * - **API ID Path**: event.default.primary.images[].image
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   image: prismic.ImageField<never>;
+}
 
+/**
+ * Primary content in *Event → Default → Primary*
+ */
+export interface EventSliceDefaultPrimary {
   /**
    * event name field in *Event → Default → Primary*
    *
@@ -483,12 +571,12 @@ export interface EventSliceDefaultPrimary {
   /**
    * short description field in *Event → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: event.default.primary.short_description
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  short_description: prismic.KeyTextField;
+  short_description: prismic.RichTextField;
 
   /**
    * tags field in *Event → Default → Primary*
@@ -519,6 +607,32 @@ export interface EventSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/timestamp
    */
   end_date_and_time: prismic.TimestampField;
+
+  /**
+   * registration_link field in *Event → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.default.primary.registration_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  registration_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * images field in *Event → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.default.primary.images[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  images: prismic.GroupField<Simplify<EventSliceDefaultPrimaryImagesItem>>;
 }
 
 /**
@@ -773,13 +887,18 @@ declare module "@prismicio/client" {
       MediaCenterDocument,
       MediaCenterDocumentData,
       MediaCenterDocumentDataSlicesSlice,
+      StartYourDayDocument,
+      StartYourDayDocumentData,
+      StartYourDayDocumentDataSlicesSlice,
       AllDocumentTypes,
       AudioMessageSlice,
+      AudioMessageSliceDefaultPrimaryMessagesItem,
       AudioMessageSliceDefaultPrimary,
       AudioMessageSliceVariation,
       AudioMessageSliceDefault,
       EventSlice,
       EventSliceDefaultPrimaryTagsItem,
+      EventSliceDefaultPrimaryImagesItem,
       EventSliceDefaultPrimary,
       EventSliceVariation,
       EventSliceDefault,

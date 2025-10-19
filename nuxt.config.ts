@@ -82,5 +82,22 @@ export default defineNuxtConfig({
 
     prismic: {
         endpoint: apiEndpoint || repositoryName
+    },
+
+    nitro: {
+        prerender: {
+            routes: [],
+            ignore: ['/slice-simulator']
+        }
+    },
+
+    hooks: {
+        'pages:extend'(pages) {
+            // Remove slice-simulator page during build
+            const indexToRemove = pages.findIndex(page => page.path === '/slice-simulator')
+            if (indexToRemove !== -1) {
+                pages.splice(indexToRemove, 1)
+            }
+        }
     }
 });

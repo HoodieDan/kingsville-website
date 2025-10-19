@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import ContainerWrapper from "~/src/components/container-wrapper.vue";
 import SwiperCarousel from "~/src/components/swiper-carousel.vue";
+import EventCarousel from "~/src/components/event-carousel.vue";
+import EventPromoBanner from "~/src/components/event-promo-banner.vue";
 import { SwiperSlide } from "swiper/vue";
+import { PrismicRichText } from "@prismicio/vue";
 import revMrsImage from "~/public/images/rev-mrs.jpg";
 import revImage from "~/public/images/rev.jpg";
 import { useScrollAnimations } from "~/src/composables/useScrollAnimation";
@@ -26,11 +29,23 @@ const nextEvent = computed(() => {
   const now = new Date();
 
   // First, check for camp meeting that hasn't ended yet
-  const campMeeting = data.value.data.slices.find((slice: { primary: { event_name: string; end_date_and_time: string | Date; start_date_and_time: string | Date; }; }) => {
-    const isCampMeeting = slice.primary.event_name?.toLowerCase().includes('camp meeting');
-    const endTime = new Date(slice.primary.end_date_and_time || slice.primary.start_date_and_time);
-    return isCampMeeting && endTime > now;
-  });
+  const campMeeting = data.value.data.slices.find(
+    (slice: {
+      primary: {
+        event_name: string;
+        end_date_and_time: string | Date;
+        start_date_and_time: string | Date;
+      };
+    }) => {
+      const isCampMeeting = slice.primary.event_name
+        ?.toLowerCase()
+        .includes("camp meeting");
+      const endTime = new Date(
+        slice.primary.end_date_and_time || slice.primary.start_date_and_time
+      );
+      return isCampMeeting && endTime > now;
+    }
+  );
 
   if (campMeeting) {
     return campMeeting;
@@ -44,7 +59,23 @@ const nextEvent = computed(() => {
     );
   });
 
-  return sorted.find((slice) => new Date(slice.primary.start_date_and_time) > now);
+  return sorted.find(
+    (slice) => new Date(slice.primary.start_date_and_time) > now
+  );
+});
+
+// Get images for the next event
+const nextEventImages = computed(() => {
+  if (!nextEvent.value?.primary?.images) return [];
+
+  const images = nextEvent.value.primary.images
+    .filter((imgObj: any) => imgObj.image && imgObj.image.url)
+    .map((imgObj: any) => ({
+      url: imgObj.image.url,
+      alt: imgObj.image.alt,
+    }));
+
+  return images;
 });
 
 // Countdown timer
@@ -55,24 +86,28 @@ const countdown = ref({
   seconds: 0,
 });
 
-const eventStatus = ref<'upcoming' | 'today' | 'started'>('upcoming');
+const eventStatus = ref<"upcoming" | "today" | "started">("upcoming");
 
 const updateCountdown = () => {
   if (!nextEvent.value) return;
 
   const now = new Date().getTime();
-  const eventTime = new Date(nextEvent.value.primary.start_date_and_time).getTime();
+  const eventTime = new Date(
+    nextEvent.value.primary.start_date_and_time
+  ).getTime();
   const distance = eventTime - now;
 
   // Event has already started
   if (distance < 0) {
-    eventStatus.value = 'started';
+    eventStatus.value = "started";
     countdown.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
     return;
   }
 
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const hours = Math.floor(
+    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -80,9 +115,9 @@ const updateCountdown = () => {
 
   // Determine if it's today
   if (days === 0) {
-    eventStatus.value = 'today';
+    eventStatus.value = "today";
   } else {
-    eventStatus.value = 'upcoming';
+    eventStatus.value = "upcoming";
   }
 };
 
@@ -110,12 +145,6 @@ onUnmounted(() => {
   }
 });
 
-watch(data, (newData) => {
-  if (newData) {
-    console.log(newData.data.slices);
-  }
-});
-
 const pastors = ref([
   {
     name: "Rev. Paul Rotua",
@@ -140,6 +169,11 @@ const viewOtherEvents = () => {
 
 <template>
   <div class="py-5 flex flex-col md:gap-10">
+    <!-- Event Promo Banner - First Thing Users See -->
+    <ContainerWrapper v-if="nextEvent" class="pt-0">
+      <EventPromoBanner :event="nextEvent" />
+    </ContainerWrapper>
+
     <div class="h-[45rem] md:h-screen w-screen md:px-10 pb-20">
       <ContainerWrapper class="h-full w-full">
         <div
@@ -271,17 +305,44 @@ const viewOtherEvents = () => {
       </div>
     </ContainerWrapper>
 
-    <ContainerWrapper v-if="nextEvent" class="mt-12">
-      <div class="md:px-20">
+    <ContainerWrapper
+      v-if="nextEvent"
+      id="upcoming-event-section"
+      class="mt-12"
+    >
+      <div class="">
         <h2 class="!font-bold text-primary-blue mb-10">Upcoming Event</h2>
         <div class="flex flex-col md:flex-row items-center gap-8">
-          <!-- Event Image -->
+          <!-- Event Image(s) -->
           <div class="w-full md:w-2/5">
+            <!-- Single Image -->
             <img
-              :src="nextEvent.primary.image.url"
-              :alt="nextEvent.primary.image.alt || nextEvent.primary.event_name"
+              v-if="nextEventImages.length === 1"
+              :src="nextEventImages[0].url"
+              :alt="nextEventImages[0].alt || nextEvent.primary.event_name"
               class="w-full md:min-h-[40rem] h-full object-cover rounded-xl t__clip__animate"
             />
+            <!-- Carousel for Multiple Images -->
+            <EventCarousel
+              v-else-if="nextEventImages.length > 1"
+              :slides-per-view="1"
+              :space-between="0"
+              :loop="true"
+              :autoplay="{ delay: 5000 }"
+              class="w-full md:min-h-[40rem] h-full rounded-xl overflow-hidden"
+            >
+              <SwiperSlide
+                v-for="(image, index) in nextEventImages"
+                :key="index"
+                class="w-full h-full"
+              >
+                <img
+                  :src="image.url"
+                  :alt="image.alt || nextEvent.primary.event_name"
+                  class="w-full md:min-h-[40rem] h-full object-cover"
+                />
+              </SwiperSlide>
+            </EventCarousel>
           </div>
 
           <!-- Event Details -->
@@ -290,9 +351,9 @@ const viewOtherEvents = () => {
               {{ nextEvent.primary.event_name }}
             </h2>
 
-            <p class="text-gray-700 t__fade__animate">
-              {{ nextEvent.primary.short_description }}
-            </p>
+            <div class="text-gray-700 t__fade__animate">
+              <PrismicRichText :field="nextEvent.primary.short_description" />
+            </div>
 
             <div class="flex flex-wrap gap-2">
               <span
@@ -309,14 +370,22 @@ const viewOtherEvents = () => {
                 class="text-gray-500 font-medium t__fade__animate"
                 :datetime="nextEvent.primary.start_date_and_time"
               >
-                <span class="font-semibold">Starts:</span> {{ new Date(nextEvent.primary.start_date_and_time).toLocaleString() }}
+                <span class="font-semibold">Starts:</span>
+                {{
+                  new Date(
+                    nextEvent.primary.start_date_and_time
+                  ).toLocaleString()
+                }}
               </time>
               <time
                 v-if="nextEvent.primary.end_date_and_time"
                 class="text-gray-500 font-medium t__fade__animate"
                 :datetime="nextEvent.primary.end_date_and_time"
               >
-                <span class="font-semibold">Ends:</span> {{ new Date(nextEvent.primary.end_date_and_time).toLocaleString() }}
+                <span class="font-semibold">Ends:</span>
+                {{
+                  new Date(nextEvent.primary.end_date_and_time).toLocaleString()
+                }}
               </time>
             </div>
 
@@ -454,9 +523,38 @@ const viewOtherEvents = () => {
               </div>
             </div>
 
-            <button class="mt-4 px-6 py-2 !w-auto" @click="viewOtherEvents">
-              View other events
-            </button>
+            <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+              <button class="mt-4 px-6 py-2 !w-auto" @click="viewOtherEvents">
+                View other events
+              </button>
+              <button
+                v-if="nextEvent.primary.registration_link?.text"
+                class="mt-4 px-6 py-2 !w-auto !bg-primary-orange !text-white hover:!bg-primary-orange/90"
+                @click="
+                  () =>
+                    navigateTo(nextEvent.primary.registration_link.text, {
+                      external: true,
+                      open: { target: '_blank' },
+                    })
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 inline-block mr-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                Reserve My Seat
+              </button>
+            </div>
           </div>
         </div>
       </div>

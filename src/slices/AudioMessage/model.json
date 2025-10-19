@@ -26,17 +26,6 @@
             "placeholder": ""
           }
         },
-        "message_audio_link": {
-          "type": "Link",
-          "config": {
-            "label": "message audio link",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": false
-          }
-        },
         "minister": {
           "type": "Text",
           "config": {
@@ -50,6 +39,26 @@
             "label": "thumbnail",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "messages": {
+          "type": "Group",
+          "config": {
+            "label": "messages",
+            "repeat": true,
+            "fields": {
+              "audio_message_link": {
+                "type": "Link",
+                "config": {
+                  "label": "audio message link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
           }
         }
       },
