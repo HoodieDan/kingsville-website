@@ -28,7 +28,16 @@
 					/>
 				</div>
 
-				<!-- Event images carousel -->
+				<!-- Single event image (when only 1 image) -->
+				<div v-else-if="allEventImages.length === 1" class="flex-1 bg-grey rounded-lg overflow-hidden h-[30rem] md:h-[35rem]">
+					<img
+						:src="allEventImages[0].url"
+						:alt="allEventImages[0].alt || 'Event image'"
+						class="w-full h-full object-cover rounded-lg t__clip__animate"
+					/>
+				</div>
+
+				<!-- Event images carousel (when 2 or more images) -->
 				<div v-else class="flex-1 bg-grey rounded-lg overflow-hidden h-[30rem] md:h-[35rem]">
 					<EventCarousel
 						:slides-per-view="1"
