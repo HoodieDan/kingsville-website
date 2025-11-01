@@ -33,4 +33,4 @@ jobs:
           port: ${{ secrets.CPANEL_FTP_PORT }}
           local-dir: .output/public/
           server-dir: /public_html/
-          protocol: ftp
+          protocol: ftps
