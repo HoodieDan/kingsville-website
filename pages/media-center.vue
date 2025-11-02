@@ -18,7 +18,7 @@
           <h1 class="mb-3">Previous Messages</h1>
           <p>
             Dive into Spirit-led teachings and timeless truth. This is more than
-            media—it's fuel for your walk with God and your impact in the world.
+            media. It's fuel for your walk with God and your impact in the world.
           </p>
         </div>
 
