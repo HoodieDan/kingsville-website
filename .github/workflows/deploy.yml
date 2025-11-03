@@ -34,4 +34,3 @@ jobs:
           local-dir: .output/public/
           server-dir: /
           protocol: ftps
-          dangerous-clean-slate: true
