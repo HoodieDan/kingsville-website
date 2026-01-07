@@ -14,12 +14,26 @@ const currentTime = ref(0);
 const duration = ref(0);
 const audioElement = ref<HTMLAudioElement | null>(null);
 
-// Initialize with most recent message
+// Initialize with most recent message, reset when tab changes
 watch(
   () => props.messages,
   (newMessages) => {
-    if (newMessages && newMessages.length > 0 && !expandedMessage.value) {
-      expandedMessage.value = newMessages[0];
+    if (newMessages && newMessages.length > 0) {
+      // Check if current expanded message exists in the new messages
+      const existsInNewMessages = expandedMessage.value &&
+        newMessages.some((msg) => msg.id === expandedMessage.value.id);
+
+      // Reset to first message if current doesn't exist in new list (tab changed)
+      if (!existsInNewMessages) {
+        expandedMessage.value = newMessages[0];
+
+        // Stop playback when switching tabs
+        if (audioElement.value) {
+          audioElement.value.pause();
+          isPlaying.value = false;
+        }
+        currentTrack.value = null;
+      }
     }
   },
   { immediate: true }
