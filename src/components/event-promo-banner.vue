@@ -1,75 +1,14 @@
 <script setup lang="ts">
-import { ref, computed, watch, onUnmounted } from "vue";
+import { computed } from "vue";
+import { useEventCountdown } from "~/src/composables/useEventCountdown";
+import type { WebsiteEvent } from "~/src/utils/events";
 import { PrismicRichText } from "@prismicio/vue";
 
 const props = defineProps<{
-  event: any;
+  event: WebsiteEvent;
 }>();
 
-// Countdown timer
-const countdown = ref({
-  days: 0,
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-});
-
-const eventStatus = ref<"upcoming" | "today" | "started">("upcoming");
-
-const updateCountdown = () => {
-  if (!props.event) return;
-
-  const now = new Date().getTime();
-  const eventTime = new Date(props.event.primary.start_date_and_time).getTime();
-  const distance = eventTime - now;
-
-  // Event has already started
-  if (distance < 0) {
-    eventStatus.value = "started";
-    countdown.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    return;
-  }
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  countdown.value = { days, hours, minutes, seconds };
-
-  // Determine if it's today
-  if (days === 0) {
-    eventStatus.value = "today";
-  } else {
-    eventStatus.value = "upcoming";
-  }
-};
-
-// Update countdown every second
-let countdownInterval: NodeJS.Timeout | null = null;
-
-watch(
-  () => props.event,
-  (newEvent) => {
-    if (countdownInterval) {
-      clearInterval(countdownInterval);
-    }
-
-    if (newEvent) {
-      updateCountdown();
-      countdownInterval = setInterval(updateCountdown, 1000);
-    }
-  },
-  { immediate: true }
-);
-
-onUnmounted(() => {
-  if (countdownInterval) {
-    clearInterval(countdownInterval);
-  }
-});
+const { countdown, eventStatus, countdownLabel } = useEventCountdown(() => props.event);
 
 // Get the first event image or fallback
 const eventImage = computed(() => {
@@ -88,7 +27,13 @@ const reserveSeat = () => {
   }
 };
 
+const route = useRoute();
+
 const scrollToEvent = () => {
+  if (props.event.detailsPath && route.path !== props.event.detailsPath) {
+    navigateTo(props.event.detailsPath);
+    return;
+  }
   const eventSection = document.querySelector("#upcoming-event-section");
   if (eventSection) {
     eventSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -102,7 +47,7 @@ const scrollToEvent = () => {
   >
     <!-- Background Image with Overlay -->
     <div
-      class="absolute inset-0 bg-cover bg-center z-0"
+      class="!absolute inset-0 bg-cover bg-center z-0"
       :style="
         eventImage
           ? `background-image: url('${eventImage}')`
@@ -111,7 +56,7 @@ const scrollToEvent = () => {
     >
       <!-- Gradient Overlay -->
       <div
-        class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70"
+        class="!absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70"
       ></div>
     </div>
 
@@ -141,19 +86,24 @@ const scrollToEvent = () => {
 
           <!-- Event Title -->
           <h2
-            class="text-3xl md:text-5xl font-bold mb-4 leading-tight !text-black"
+            class="text-3xl md:text-5xl font-bold mb-4 leading-tight !text-white"
           >
             {{ event.primary.event_name }}
           </h2>
 
           <!-- Event Description - Truncated -->
-          <div class="mb-6 line-clamp-3 event-description !text-black">
+          <div class="mb-6 line-clamp-3 event-description !text-white">
             <PrismicRichText :field="event.primary.short_description" />
           </div>
 
+          <div v-if="event.dateLabel" class="mb-6 text-sm !text-white space-y-2">
+            <p class="!font-semibold">{{ event.dateLabel }}</p>
+            <p>{{ event.serviceLabel }}</p>
+          </div>
           <!-- Event Dates -->
           <div
-            class="flex flex-wrap gap-4 mb-6 text-sm event-dates !text-black"
+            v-else
+            class="flex flex-wrap gap-4 mb-6 text-sm event-dates !text-white"
           >
             <div class="flex items-center gap-2">
               <svg
@@ -170,9 +120,9 @@ const scrollToEvent = () => {
               </svg>
               <span class="!font-semibold">Starts:</span>
               <span>{{
-                new Date(event.primary.start_date_and_time).toLocaleDateString(
+                new Date(event.primary.start_date_and_time!).toLocaleDateString(
                   "en-US",
-                  { month: "short", day: "numeric", year: "numeric" }
+                  { month: "short", day: "numeric", year: "numeric", timeZone: "Africa/Lagos" }
                 )
               }}</span>
             </div>
@@ -196,7 +146,7 @@ const scrollToEvent = () => {
               <span>{{
                 new Date(event.primary.end_date_and_time).toLocaleDateString(
                   "en-US",
-                  { month: "short", day: "numeric", year: "numeric" }
+                  { month: "short", day: "numeric", year: "numeric", timeZone: "Africa/Lagos" }
                 )
               }}</span>
             </div>
@@ -238,8 +188,10 @@ const scrollToEvent = () => {
           <div
             class="backdrop-blur-md rounded-2xl p-6 countdown-container !bg-primary-blue !border-2 !border-primary-orange"
           >
+            <p v-if="event.sessions" class="text-sm !text-white text-center mb-3">{{ countdownLabel }}</p>
+            <p v-if="eventStatus === 'ended'" class="text-center !text-white !font-bold">This event has ended.</p>
             <!-- Event Started -->
-            <div v-if="eventStatus === 'started'" class="text-center">
+            <div v-else-if="eventStatus === 'started'" class="text-center">
               <div class="flex items-center justify-center gap-2 mb-2">
                 <div
                   class="w-3 h-3 rounded-full live-indicator !bg-primary-orange"
@@ -372,11 +324,11 @@ const scrollToEvent = () => {
 .event-description :deep(p) {
   margin: 0;
   line-height: 1.6;
-  color: black !important;
+  color: white !important;
 }
 
 .event-description :deep(strong) {
-  color: black !important;
+  color: white !important;
   font-weight: 700;
 }
 </style>

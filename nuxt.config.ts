@@ -86,7 +86,7 @@ export default defineNuxtConfig({
 
     nitro: {
         prerender: {
-            routes: [],
+            routes: ["/crusade"],
             ignore: ['/slice-simulator']
         }
     },

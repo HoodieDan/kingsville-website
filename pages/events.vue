@@ -15,7 +15,7 @@
 				</div>
 
 				<!-- Loading state for hero image/carousel -->
-				<div v-if="pending" class="flex-1 bg-grey rounded-lg overflow-hidden h-[30rem] md:h-[35rem] flex items-center justify-center">
+				<div v-if="pending && !hasEventImages" class="flex-1 bg-grey rounded-lg overflow-hidden h-[30rem] md:h-[35rem] flex items-center justify-center">
 					<div class="spinner"></div>
 				</div>
 
@@ -54,7 +54,7 @@
 							<img
 								:src="image.url"
 								:alt="image.alt || 'Event image'"
-								class="w-full h-full object-cover"
+								class="w-full h-full object-contain"
 							/>
 						</SwiperSlide>
 					</EventCarousel>
@@ -74,9 +74,10 @@
 						/>
 					</div>
 
-					<LoadingSpinner v-if="pending" />
+
+					<LoadingSpinner v-if="pending && filteredEvents.length === 0" />
 					<div
-						v-if="filteredEvents.length > 0 && !pending"
+						v-if="filteredEvents.length > 0"
 						class="flex-1 space-y-8"
 					>
 						<div
@@ -121,7 +122,12 @@
 								<h5 class="mb-2">
 									{{ event.primary.event_name }}
 								</h5>
-								<div class="flex flex-col gap-1 mb-2">
+								<div v-if="event.dateLabel" class="flex flex-col gap-1 mb-2 text-sm">
+                                    <p class="font-semibold">{{ event.dateLabel }}</p>
+                                    <p>{{ event.serviceLabel }}</p>
+                                    <NuxtLink :to="event.detailsPath" class="text-primary-orange underline">Full event details</NuxtLink>
+                                </div>
+                                <div v-else class="flex flex-col gap-1 mb-2">
 									<p class="text-sm">
 										<span class="font-semibold">Starts:</span>
 										{{ formatDateTime(event.primary.start_date_and_time) }}
@@ -198,37 +204,17 @@ import LoadingSpinner from "~/src/components/loading-spinner.vue";
 import { SwiperSlide } from "swiper/vue";
 import { PrismicRichText } from "@prismicio/vue";
 import { useScrollAnimations } from "~/src/composables/useScrollAnimation";
-import { useQuery } from "@tanstack/vue-query";
+import { useEvents } from "~/src/composables/useEvents";
+import { getUpcomingEvents } from "~/src/utils/events";
 
 useScrollAnimations();
 
 const searchQuery = ref("");
 
-const prismic = usePrismic();
+const { events, now, pending } = useEvents();
 
-const { data, isLoading: pending } = useQuery({
-	queryKey: ["events"],
-	queryFn: () => prismic.client.getSingle("events"),
-});
-
-// Filter out past events and match search
-const filteredEvents = computed(() => {
-	if (!data.value?.data?.slices) return [];
-
-	const today = new Date();
-	const events = data.value.data.slices
-		.filter((event) => {
-			// Use end_date_and_time if available, otherwise use start_date_and_time
-			const eventDate = new Date(event.primary.end_date_and_time || event.primary.start_date_and_time);
-			return eventDate >= today;
-		})
-		.filter((event) => {
-			const name = event.primary.event_name?.toLowerCase() || "";
-			return name.includes(searchQuery.value.toLowerCase());
-		});
-
-	return events;
-});
+const filteredEvents = computed(() => getUpcomingEvents(events.value, now.value)
+  .filter(event => (event.primary.event_name ?? "").toLowerCase().includes(searchQuery.value.toLowerCase())));
 
 // Get all event images for carousel
 const allEventImages = computed(() => {
@@ -307,35 +293,47 @@ const addToGoogleCalendar = (event) => {
 		return date.toISOString().replace(/-|:|\.\d+/g, '');
 	};
 
-	// Create ICS file content with proper reminders
+	const sessions = event.sessions?.length ? event.sessions : [{ start: startDate.toISOString(), end: endDate.toISOString() }];
+
+	const escapeCalendarText = (value) => String(value ?? "")
+		.replace(/\\/g, "\\\\")
+		.replace(/\r?\n/g, "\\n")
+		.replace(/,/g, "\\,")
+		.replace(/;/g, "\\;");
+
+	// Create ICS file content with a separate entry for each service.
 	const icsContent = [
 		'BEGIN:VCALENDAR',
 		'VERSION:2.0',
 		'PRODID:-//Kingsville Church//Events//EN',
 		'CALSCALE:GREGORIAN',
 		'METHOD:PUBLISH',
+		...sessions.flatMap((session, index) => [
 		'BEGIN:VEVENT',
-		`DTSTART:${formatGoogleDate(startDate)}`,
-		`DTEND:${formatGoogleDate(endDate)}`,
-		`SUMMARY:${event.primary.event_name}`,
-		`DESCRIPTION:${event.primary.short_description || ''}`,
-		`LOCATION:Kingsville Church`,
+		`UID:${event.id}-${index}@kingsvillechurch.org`,
+		`DTSTAMP:${formatGoogleDate(new Date())}`,
+		`DTSTART:${formatGoogleDate(new Date(session.start))}`,
+		`DTEND:${formatGoogleDate(new Date(session.end))}`,
+		`SUMMARY:${escapeCalendarText(event.primary.event_name)}`,
+		`DESCRIPTION:${escapeCalendarText(event.primary.short_description.map(block => block.text || "").join(" "))}`,
+		`LOCATION:${escapeCalendarText(event.location || "Kingsville Church")}`,
 		'BEGIN:VALARM',
 		'TRIGGER:-P15D', // 15 days before
 		'ACTION:DISPLAY',
-		`DESCRIPTION:Reminder: ${event.primary.event_name} in 15 days`,
+		`DESCRIPTION:Reminder: ${escapeCalendarText(event.primary.event_name)} in 15 days`,
 		'END:VALARM',
 		'BEGIN:VALARM',
 		'TRIGGER:-P7D', // 7 days before
 		'ACTION:DISPLAY',
-		`DESCRIPTION:Reminder: ${event.primary.event_name} in 1 week`,
+		`DESCRIPTION:Reminder: ${escapeCalendarText(event.primary.event_name)} in 1 week`,
 		'END:VALARM',
 		'BEGIN:VALARM',
 		'TRIGGER:-P2D', // 2 days before
 		'ACTION:DISPLAY',
-		`DESCRIPTION:Reminder: ${event.primary.event_name} in 2 days`,
+		`DESCRIPTION:Reminder: ${escapeCalendarText(event.primary.event_name)} in 2 days`,
 		'END:VALARM',
 		'END:VEVENT',
+		]),
 		'END:VCALENDAR'
 	].join('\r\n');
 
@@ -347,6 +345,8 @@ const addToGoogleCalendar = (event) => {
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);
+	const objectUrl = link.href;
+	setTimeout(() => window.URL.revokeObjectURL(objectUrl), 1000);
 };
 </script>
 

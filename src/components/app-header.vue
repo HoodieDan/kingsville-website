@@ -39,7 +39,7 @@ const toggleNav = () => {
 				<div class="flex justify-center gap-5">
 					<NuxtLink to="/" class="link">Home</NuxtLink>
 					<NuxtLink to="/about" class="link">About</NuxtLink>
-					<NuxtLink to="/crusade" class="link text-primary-orange">Crusade</NuxtLink>
+					<NuxtLink to="/outpour" class="link text-primary-orange">The Outpour</NuxtLink>
 					<NuxtLink to="/events" class="link">Events</NuxtLink>
 					<NuxtLink to="/ministries" class="link">Ministries</NuxtLink>
 					<NuxtLink to="/media-center" class="link"
@@ -174,10 +174,10 @@ const toggleNav = () => {
 								</div>
 								<div class="nav-link">
 									<NuxtLink
-										to="/crusade"
+										to="/outpour"
 										class="link !text-primary-orange"
 										@click="toggleNav"
-										>Crusade</NuxtLink
+										>The Outpour</NuxtLink
 									>
 									<div class="nav-item-wrapper"></div>
 								</div>

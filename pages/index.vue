@@ -8,61 +8,14 @@ import { PrismicRichText } from "@prismicio/vue";
 import revMrsImage from "~/public/images/rev-mrs.jpg";
 import revImage from "~/public/images/rev.jpg";
 import { useScrollAnimations } from "~/src/composables/useScrollAnimation";
-import { useQuery } from "@tanstack/vue-query";
+import { useEvents } from "~/src/composables/useEvents";
+import { useEventCountdown } from "~/src/composables/useEventCountdown";
+import { getFeaturedEvent } from "~/src/utils/events";
 
 useScrollAnimations();
 
-const prismic = usePrismic();
-
-const { data } = useQuery({
-  queryKey: ["events"],
-  queryFn: async () => {
-    const response = await prismic.client.getSingle("events");
-    return response;
-  },
-});
-
-// Compute the next event
-const nextEvent = computed(() => {
-  if (!data.value?.data?.slices) return null;
-
-  const now = new Date();
-
-  // First, check for camp meeting that hasn't ended yet
-  const campMeeting = data.value.data.slices.find(
-    (slice: {
-      primary: {
-        event_name: string;
-        end_date_and_time: string | Date;
-        start_date_and_time: string | Date;
-      };
-    }) => {
-      const isCampMeeting = slice.primary.event_name
-        ?.toLowerCase()
-        .includes("camp meeting");
-      const endTime = new Date(
-        slice.primary.end_date_and_time || slice.primary.start_date_and_time
-      );
-      return isCampMeeting && endTime > now;
-    }
-  );
-
-  if (campMeeting) {
-    return campMeeting;
-  }
-
-  // Otherwise, find the next upcoming event by start time
-  const sorted = [...data.value.data.slices].sort((a, b) => {
-    return (
-      new Date(a.primary.start_date_and_time).getTime() -
-      new Date(b.primary.start_date_and_time).getTime()
-    );
-  });
-
-  return sorted.find(
-    (slice) => new Date(slice.primary.start_date_and_time) > now
-  );
-});
+const { events, now } = useEvents();
+const nextEvent = computed(() => getFeaturedEvent(events.value, now.value));
 
 // Get images for the next event
 const nextEventImages = computed(() => {
@@ -78,72 +31,7 @@ const nextEventImages = computed(() => {
   return images;
 });
 
-// Countdown timer
-const countdown = ref({
-  days: 0,
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-});
-
-const eventStatus = ref<"upcoming" | "today" | "started">("upcoming");
-
-const updateCountdown = () => {
-  if (!nextEvent.value) return;
-
-  const now = new Date().getTime();
-  const eventTime = new Date(
-    nextEvent.value.primary.start_date_and_time
-  ).getTime();
-  const distance = eventTime - now;
-
-  // Event has already started
-  if (distance < 0) {
-    eventStatus.value = "started";
-    countdown.value = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    return;
-  }
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  countdown.value = { days, hours, minutes, seconds };
-
-  // Determine if it's today
-  if (days === 0) {
-    eventStatus.value = "today";
-  } else {
-    eventStatus.value = "upcoming";
-  }
-};
-
-// Update countdown every second
-let countdownInterval: NodeJS.Timeout | null = null;
-
-watch(
-  nextEvent,
-  (newEvent) => {
-    if (countdownInterval) {
-      clearInterval(countdownInterval);
-    }
-
-    if (newEvent) {
-      updateCountdown();
-      countdownInterval = setInterval(updateCountdown, 1000);
-    }
-  },
-  { immediate: true }
-);
-
-onUnmounted(() => {
-  if (countdownInterval) {
-    clearInterval(countdownInterval);
-  }
-});
+const { countdown, eventStatus, countdownLabel } = useEventCountdown(nextEvent);
 
 const pastors = ref([
   {
@@ -358,39 +246,31 @@ const viewOtherEvents = () => {
             <div class="flex flex-wrap gap-2">
               <span
                 v-for="tag in nextEvent.primary.tags"
-                :key="tag.tag_name"
+                :key="tag.tag_name || ''"
                 class="px-3 py-1 bg-primary-orange/10 text-primary-orange rounded-full text-sm t__fade__animate"
               >
                 {{ tag.tag_name }}
               </span>
             </div>
 
-            <div class="flex flex-col gap-1">
-              <time
-                class="text-gray-500 font-medium t__fade__animate"
-                :datetime="nextEvent.primary.start_date_and_time"
-              >
-                <span class="font-semibold">Starts:</span>
-                {{
-                  new Date(
-                    nextEvent.primary.start_date_and_time
-                  ).toLocaleString()
-                }}
+            <div v-if="nextEvent.dateLabel" class="flex flex-col gap-1 text-gray-600">
+              <p class="font-semibold">{{ nextEvent.dateLabel }}</p>
+              <p>{{ nextEvent.serviceLabel }}</p>
+              <p>{{ nextEvent.location }}</p>
+              <NuxtLink :to="nextEvent.detailsPath" class="text-primary-orange underline">Full event details</NuxtLink>
+            </div>
+            <div v-else class="flex flex-col gap-1 text-gray-500">
+              <time :datetime="nextEvent.primary.start_date_and_time || undefined">
+                Starts: {{ new Date(nextEvent.primary.start_date_and_time!).toLocaleString('en-US', { timeZone: 'Africa/Lagos' }) }} WAT
               </time>
-              <time
-                v-if="nextEvent.primary.end_date_and_time"
-                class="text-gray-500 font-medium t__fade__animate"
-                :datetime="nextEvent.primary.end_date_and_time"
-              >
-                <span class="font-semibold">Ends:</span>
-                {{
-                  new Date(nextEvent.primary.end_date_and_time).toLocaleString()
-                }}
+              <time v-if="nextEvent.primary.end_date_and_time" :datetime="nextEvent.primary.end_date_and_time">
+                Ends: {{ new Date(nextEvent.primary.end_date_and_time).toLocaleString('en-US', { timeZone: 'Africa/Lagos' }) }} WAT
               </time>
             </div>
 
             <!-- Countdown Timer -->
             <div class="mt-6 p-6 bg-primary-blue/5 rounded-lg">
+              <p v-if="nextEvent.sessions" class="text-sm font-semibold text-primary-blue mb-3">{{ countdownLabel }}</p>
               <!-- Event has started -->
               <div v-if="eventStatus === 'started'" class="text-center">
                 <div class="flex items-center justify-center gap-2 mb-2">
@@ -532,7 +412,7 @@ const viewOtherEvents = () => {
                 class="mt-4 px-6 py-2 !w-auto !bg-primary-orange !text-white hover:!bg-primary-orange/90"
                 @click="
                   () =>
-                    navigateTo(nextEvent.primary.registration_link.text, {
+                    navigateTo(nextEvent.primary.registration_link?.text, {
                       external: true,
                       open: { target: '_blank' },
                     })
