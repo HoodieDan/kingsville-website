@@ -19,10 +19,10 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: corepack yarn install --frozen-lockfile --non-interactive
 
       - name: Build static site
-        run: npm run generate
+        run: corepack yarn generate
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
